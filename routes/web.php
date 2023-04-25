@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Course\CategoryController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +43,6 @@ Route::resource('chirps', ChirpController::class)
     ->only(['index', 'store', 'update', 'destroy'])
     ->middleware(['auth','verified']);
 
-Route::get('/chat', [ChatController::class, 'index'])->middleware(['auth', 'verified'])->name('chat');
 
 Route::get('/teacher', function () {
     return Inertia::render('Teacher/Home');
@@ -56,6 +57,31 @@ Route::get('/course', [CourseController::class, 'create'])->name('course.create'
 Route::post('/create', [CourseController::class, 'store'])->middleware(['auth', 'verified'])->name('course.store');
 
 // Route::post('/course', [CourseController::class, 'store'])->name('course.store');
+
+
+// ++++++++++++++=======================chat
+Route::get('/chat', [ChatController::class, 'index'])->middleware(['auth', 'verified'])->name('chat');
+
+
+
+Route::get('/getUsers',[ChatController::class, 'getUsers'])->name('chat.getUsers');
+
+// __________________________________________________
+
+// Route::get('/chats', [ChatController::class, 'get'])->name('chat.get');
+
+//Api
+Route::get('/chat/messages/{id}', [ChatController::class, 'getMessages'])->name('chat.getMessages');
+
+Route::get('/chat/user/lastMessage/{id}', [ChatController::class, 'getLastMessage'])->name('chat.getLastMessage');
+
+
+// Route::get('/chat/user/lastMessage/{id}', [ChatController::class, 'getLastMessage'])->name('chat.getLastMessage');
+
+Route::post('/chat/message/send',[MessageController::class, 'store'])->name('chat.sendMessage');
+// Route::post('/chat/message/delete',[MessageController::class, 'delete'])->name('chat.deleteMessage');
+
+// ++++++++++++++++++=======================end_chat
 
 
 require __DIR__.'/auth.php';
