@@ -1,9 +1,14 @@
 import { Link } from "@inertiajs/react";
 import ChatItem from "@/Pages/Chat/ChatItem";
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react'
 import DarkModeButton from "@/Components/DarkModeButton";
+import { ChatContext } from '@/Pages/Chat/ChatContext';
+
 export default function ChatList({ users, handleSelectChat }) {
     let listItems;
+
+    const { auth, currentUserChat, fetchMessages } = useContext(ChatContext);
+
     if (users) {
         listItems = users.map(user =>
             <ChatItem user={user} key={user.id} handleSelectChat={() => handleSelectChat(user)} />
@@ -19,7 +24,12 @@ export default function ChatList({ users, handleSelectChat }) {
                     <div className="flex flex-row" >
                         {/* <img className="bg-gray-200 dark:bg-gray-700 h-12 w-12 rounded-full " /> */}
                         {/* <img className="h-12 w-12 rounded-full" /> */}
-                        <div className="bg-gray-200 dark:bg-gray-700 h-12 w-12 rounded-full"></div>
+                        {/* <div className="bg-gray-200 dark:bg-gray-700 h-12 w-12 rounded-full"></div> */}
+                        <div
+                            className=" bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400 bg-origin-padding w-12 h-12 rounded-full"
+                            style={{ backgroundImage: 'url(' + 'storage/' + auth.auth.user.avatar + ')' }}>
+
+                        </div>
 
                     </div>
 
@@ -62,7 +72,7 @@ export default function ChatList({ users, handleSelectChat }) {
                 <div className="py-4 px-6 bg-white  dark:bg-gray-900 ">
 
                     <div className="flex flex-row px-4 items-center w-full bg-gray-100 dark:bg-gray-700 rounded-full text-gray-900 dark:text-gray-400 ">
-                        <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                             <path
                                 d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6 3 9.7s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.8l5.1 5.1 1.5-1.5-5-5.2zm-6.2 0c-2.6 0-4.6-2.1-4.6-4.6s2.1-4.6 4.6-4.6 4.6 2.1 4.6 4.6-2 4.6-4.6 4.6z">
                             </path>
@@ -75,7 +85,7 @@ export default function ChatList({ users, handleSelectChat }) {
             </div>
 
             {/* Contacts */}
-            <div className="bg-gray-200 dark:bg-gray-800  flex-1 overflow-auto" id="collection">
+            <div className="bg-gray-200 dark:bg-gray-800 overflow-auto" id="collection">
                 <div id="item">
                     {/* <ChatItem /> */}
                     {listItems}

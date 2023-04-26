@@ -25,8 +25,11 @@ export default function Chat(auth) {
             })
     }
     function handleSelectChat(user) {
-        fetchMessages(user);
+
         setCurrentUserChat(() => user);
+        if (user != currentUserChat) {
+            fetchMessages(user);
+        }
 
     }
     async function fetchMessages(user) {
@@ -43,8 +46,8 @@ export default function Chat(auth) {
     }
     function addToMessageContainer(e) {
         console.log(e);
-        console.log(e.sender_user_id +" == "+ currentUserChat.id);
-        console.log(e.receiver_user_id +" == "+ currentUserChat.id);
+        console.log(e.sender_user_id + " == " + currentUserChat.id);
+        console.log(e.receiver_user_id + " == " + currentUserChat.id);
 
         if (e.sender_user_id == currentUserChat.id) {
             var tmp = [...messages, e];
@@ -84,7 +87,7 @@ export default function Chat(auth) {
                         <div className="py-2 h-screen flex place-content-center ">
                             <div className="flex border border-gray border-0 rounded shadow-lg h-full overflow-auto " style={{ width: '75em' }}>
                                 {/* Left Side of View */}
-                                <div className="w-1/3 border flex flex-col overflow-auto border-none" style={{ minWidth: '20em' }}>
+                                <div className="w-1/3 border flex flex-col border-none" style={{ minWidth: '20em' }}>
                                     <ChatList users={users} handleSelectChat={handleSelectChat} />
                                 </div>
                                 {/* Right Side of View */}

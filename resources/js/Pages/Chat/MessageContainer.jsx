@@ -22,17 +22,17 @@ export default function MessageContainer({ messages }) {
     useEffect(() => {
 
         if (currentUserChat) {
-            // console.log(currentUserChat);
+            console.log(currentUserChat);
             // fetchMessages();
 
 
         }
-        if(messages){
+        if (messages) {
             setMessageItems(mapAll(messages))
 
         }
 
-    }, [currentUserChat,messages]);
+    }, [currentUserChat, messages]);
 
     function a() {
         console.log(messageItems)
@@ -47,11 +47,21 @@ export default function MessageContainer({ messages }) {
                         {/* <img className="h-12 w-12 rounded-full" />
                         <img className="h-12 w-12 rounded-full" /> */}
 
-                        <div className="bg-gray-200 dark:bg-gray-700 h-12 w-12 rounded-full"></div>
+                        {/* <div className="bg-gray-200 dark:bg-gray-700 h-12 w-12 rounded-full"></div> */}
+                        {
+                            currentUserChat?.avatar ?
+                                <div
+                                    className=" bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400 bg-origin-padding w-12 h-12 rounded-full"
+                                    style={{ backgroundImage: 'url(' + 'storage/' + currentUserChat?.avatar + ')' }}>
+                                </div>
+                                :
+                                <div className="bg-gray-200 dark:bg-gray-700 h-12 w-12 rounded-full"></div>
+
+                        }
 
                     </div>
                     <div className="ml-4 dark:text-gray-200">
-                        <p className="text-gray-darkest ">
+                        <p className="text-gray-darkest w-36 truncate overflow-hidden">
                             {currentUserChat?.name}
                         </p>
                         <p onClick={a} className="text-gray-darker text-xs mt-1" >

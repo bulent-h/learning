@@ -9,7 +9,7 @@ import { useState } from 'react';
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, patch, post, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
         avatar: user.avatar,
@@ -46,7 +46,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     }
 
     const submit = (e) => {
-        console.log(data)
         e.preventDefault();
         post(route('profile.update'));
     };
@@ -82,7 +81,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                                         :
                                         <div className='flex items-center'>
 
-                                            <div className="p-4 m-2 bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400  bg-origin-padding  border-4 border-dashed w-32 h-32 rounded-full" style={{ backgroundImage: 'url(' + 'storage/' + data.avatar + ')' }}></div>
+                                            <div className="p-4 m-2 bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400  bg-origin-padding w-32 h-32 rounded-full" style={{ backgroundImage: 'url(' + 'storage/' + data.avatar + ')' }}></div>
                                         </div>
                                 }
                             </div>

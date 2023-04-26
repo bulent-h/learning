@@ -39,7 +39,7 @@ export default function Authenticated({ user, header, children }) {
 
                         </div>
                         {/* search bar */}
-                        <div className="flex flex-row  items-center w-3/12 px-4 my-4 rounded-full bg-gray-200 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300  border-none overflow-hidden">
+                        {/* <div className="flex flex-row  items-center w-3/12 px-4 my-4 rounded-full bg-gray-200 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300  border-none overflow-hidden">
 
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
                                 <path fill="#263238" fillOpacity=".5"
@@ -51,7 +51,8 @@ export default function Authenticated({ user, header, children }) {
                                     className='bg-gray-200 text-center border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300  focus:ring-0  dark:focus:ring-0 rounded-md  border-none'
                                     placeholder="Search" />
                             </div>
-                        </div>
+                        </div> */}
+                        {/*End search bar */}
 
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
