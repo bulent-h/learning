@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import CreateCategory from './Partials/CreateCategory';
-
 import { Head } from '@inertiajs/react';
+import PrimaryButton from '@/Components/PrimaryButton';
+import CourseMangeCard from '@/Components/Course/CourseMangeCard';
 
 export default function Home({ auth }) {
     return (
@@ -16,7 +16,7 @@ export default function Home({ auth }) {
                     <div>
 
                         <div className=" p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg " >
-                            <div>fwkelmflkew</div>
+                            <div className='mb-6 text-black dark:text-white text-xl' >Create a Course / Category</div>
                             <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-2 ' >
                                 <div className='flex flex-col  shrink-0 place-items-center h-72 w-48 rounded-3xl m-2 '
                                     style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
@@ -33,108 +33,25 @@ export default function Home({ auth }) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='flex flex-col  shrink-0 place-items-center h-72 w-48 rounded-3xl m-2 '
-                                    style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
-                                >
-                                    <div className='flex flex-col h-full '>
-                                        <div className='flex justify-center my-4'>
-                                            Create Category
-
-                                        </div>
-                                        <div className='flex h-full justify-center my-4 place-items-center '>
-                                            <div className='flex justify-center items-center rounded-full border-2 w-12 h-12  '>
-                                                <p>+</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex flex-col  shrink-0 place-items-center h-72 w-48 rounded-3xl m-2 '
-                                    style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
-                                >
-                                    <div className='flex flex-col h-full '>
-                                        <div className='flex justify-center my-4'>
-                                            Create Category
-
-                                        </div>
-                                        <div className='flex h-full justify-center my-4 place-items-center '>
-                                            <div className='flex justify-center items-center rounded-full border-2 w-12 h-12  '>
-                                                <p>+</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex flex-col  shrink-0 place-items-center h-72 w-48 rounded-3xl m-2 '
-                                    style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
-                                >
-                                    <div className='flex flex-col h-full '>
-                                        <div className='flex justify-center my-4'>
-                                            Create Category
-
-                                        </div>
-                                        <div className='flex h-full justify-center my-4 place-items-center '>
-                                            <div className='flex justify-center items-center rounded-full border-2 w-12 h-12  '>
-                                                <p>+</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex flex-col  shrink-0 place-items-center h-72 w-48 rounded-3xl m-2 '
-                                    style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
-                                >
-                                    <div className='flex flex-col h-full '>
-                                        <div className='flex justify-center my-4'>
-                                            Create Category
-
-                                        </div>
-                                        <div className='flex h-full justify-center my-4 place-items-center '>
-                                            <div className='flex justify-center items-center rounded-full border-2 w-12 h-12  '>
-                                                <p>+</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex flex-col  shrink-0 place-items-center h-72 w-48 rounded-3xl m-2 '
-                                    style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
-                                >
-                                    <div className='flex flex-col h-full '>
-                                        <div className='flex justify-center my-4'>
-                                            Create Category
-
-                                        </div>
-                                        <div className='flex h-full justify-center my-4 place-items-center '>
-                                            <div className='flex justify-center items-center rounded-full border-2 w-12 h-12  '>
-                                                <p>+</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex flex-col  shrink-0 place-items-center h-72 w-48 rounded-3xl m-2 '
-                                    style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
-                                >
-                                    <div className='flex flex-col h-full '>
-                                        <div className='flex justify-center my-4'>
-                                            Create Category
-
-                                        </div>
-                                        <div className='flex h-full justify-center my-4 place-items-center '>
-                                            <div className='flex justify-center items-center rounded-full border-2 w-12 h-12  '>
-                                                <p>+</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-
-
                         </div>
 
                     </div>
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                        <CreateCategory className="max-w-xl" />
-                    </div>
+
+                    {/* ____________ */}
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                        {/* <DeleteUserForm className="max-w-xl" /> */}
+                        <div className='mb-6 text-black dark:text-white text-xl' > My Classes</div>
+
+                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2 ' >
+
+                            <CourseMangeCard className=" " ></CourseMangeCard>
+                            <CourseMangeCard></CourseMangeCard>
+                            <CourseMangeCard></CourseMangeCard>
+                            <CourseMangeCard></CourseMangeCard>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
