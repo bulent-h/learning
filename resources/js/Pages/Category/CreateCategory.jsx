@@ -6,38 +6,21 @@ import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import Dropdown from '@/Components/Dropdown';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Head } from '@inertiajs/react';
 
 
-export default function CreateCategory({ className = '' }) {
+export default function CreateCategory() {
     const categoryName = useRef();
-    // const [allCategory,setAllCategory] = useState();
 
-    useEffect(()=>{
-        // getCategory();
-    },[])
-
-    async function getCategory(){
-        await axios.get(route('teacher.getCategory'))
-        .then((data) => {
-            setAllCategory(data.data);
-            console.log(data.data);
-        }).catch(err => {
-            console.error(err);
-        })
-    }
-    function editCategory(){
-
-    }
 
     const { data, setData, errors, post, reset, processing, recentlySuccessful } = useForm({
         category_name: '',
-        // all_category: '',
     });
 
     const CreateCategory = (e) => {
         e.preventDefault();
-
-        post(route('category.create'), {
+        post(route('category.store'), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {
@@ -50,7 +33,8 @@ export default function CreateCategory({ className = '' }) {
     };
 
     return (
-        <section className={className}>
+
+        <section className="max-w-xl">
             <header>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create Category</h2>
 
@@ -60,6 +44,7 @@ export default function CreateCategory({ className = '' }) {
             </header>
 
             <form onSubmit={CreateCategory} className="mt-6 space-y-6">
+
                 <div>
                     <InputLabel htmlFor="category_name" value="Category Name" />
 
@@ -75,30 +60,6 @@ export default function CreateCategory({ className = '' }) {
 
                     <InputError message={errors.category_name} className="mt-2" />
                 </div>
-                <div>
-                    <InputLabel htmlFor="all_category" value="All Category" />
-
-                    <Dropdown>
-                        <Dropdown.Trigger>
-                            <span className="inline-flex rounded-md">
-                                <button
-                                    type="button"
-                                    className="inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none "
-                                >
-                                    <div className='ml-4 rounded-full bg-gray-200  dark:bg-gray-400 h-12 w-12 overflow-hidden '>
-                                        <img className="bg-gray-200  rounded-full " />
-                                    </div>
-                                </button>
-                            </span>
-                        </Dropdown.Trigger>
-                        <Dropdown.Content align = 'left' >
-                            <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                        </Dropdown.Content>
-                    </Dropdown>
-
-                    <InputError message={errors.category_name} className="mt-2" />
-                </div>
-
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Create</PrimaryButton>
@@ -114,5 +75,6 @@ export default function CreateCategory({ className = '' }) {
                 </div>
             </form>
         </section>
+
     );
 }

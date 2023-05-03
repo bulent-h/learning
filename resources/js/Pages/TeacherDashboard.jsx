@@ -23,8 +23,22 @@ export default function Home({ auth }) {
                                 >
                                     <div className='flex flex-col h-full '>
                                         <div className='flex justify-center my-4'>
-                                            Create Category
+                                            <a href={route('category.create')}>Create Category</a>
+                                        </div>
+                                        <div className='flex h-full justify-center my-4 place-items-center '>
+                                            <div className='flex justify-center items-center rounded-full bg-gray-200  w-12 h-12 '>
+                                                <p>+</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div className='flex flex-col  shrink-0 place-items-center h-72 w-48 rounded-3xl m-2 '
+                                    style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
+                                >
+                                    <div className='flex flex-col h-full '>
+                                        <div className='flex justify-center my-4'>
+                                            <a href={route('course.create')}>Create Course</a>
                                         </div>
                                         <div className='flex h-full justify-center my-4 place-items-center '>
                                             <div className='flex justify-center items-center rounded-full bg-gray-200  w-12 h-12 '>

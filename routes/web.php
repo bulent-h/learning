@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Course\CategoryController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
@@ -44,15 +44,22 @@ Route::resource('chirps', ChirpController::class)
     ->middleware(['auth','verified']);
 
 
-Route::get('/teacher', function () {
-    return Inertia::render('Teacher/Home');
-})->middleware(['auth', 'verified'])->name('teacher');
+Route::get('/teacher-dashboard', function () {
+    return Inertia::render('TeacherDashboard');
+})->middleware(['auth', 'verified'])->name('teacher.dashboard');
+
+// Category
+Route::middleware(['auth','verified'])->group(function () {
+    Route::get('/category/index', [CategoryController::class, 'index'])->name('category.index'); //json
+    Route::get('/category/create',[CategoryController::class, 'create'] )->name('category.create');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/category/show/{id}', [CategoryController::class, 'show'])->name('category.show');//json
+    Route::post('/category/update', [CategoryController::class, 'update'])->name('category.update');
+    Route::post('/category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
+});
 
 
-Route::post('/category-create', [CategoryController::class, 'store'])->middleware(['auth', 'verified'])->name('category.create');
-
-Route::get('/get-category',[CategoryController::class, 'index'] )->name('teacher.getCategory');
-
+//Course
 Route::get('/course', [CourseController::class, 'create'])->name('course.create');
 Route::post('/create', [CourseController::class, 'store'])->middleware(['auth', 'verified'])->name('course.store');
 

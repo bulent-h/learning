@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Course;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
@@ -14,7 +17,6 @@ class CategoryController extends Controller
     public function index()
     {
         $category=Category::all();
-
         return $category;
     }
 
@@ -23,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-
+        return Inertia::render('Category/Main');
     }
 
     /**
@@ -69,8 +71,13 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request)
     {
-        //
+
+        $category = Category::find($request->id);
+
+        $category->delete();
+
+        return  $category;
     }
 }

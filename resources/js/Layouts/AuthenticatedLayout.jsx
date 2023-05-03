@@ -32,7 +32,7 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('chirps.index')} active={route().current('chirps.index')}>
                                     Questions
                                 </NavLink>
-                                <NavLink href={route('teacher')} active={route().current('teacher')}>
+                                <NavLink href={route('teacher.dashboard')} active={route().current('teacher.dashboard')}>
                                     Teacher Dashboard
                                 </NavLink>
                             </div>
@@ -73,11 +73,11 @@ export default function Authenticated({ user, header, children }) {
 
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
+                                        {/* <span className="inline-flex rounded-md"> */}
+                                            {/* <button
                                                 type="button"
                                                 className="inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none "
-                                            >
+                                            > */}
                                                 {/* {user.name} */}
 
                                                 {/* <svg
@@ -94,17 +94,22 @@ export default function Authenticated({ user, header, children }) {
                                                 </svg> */}
                                                 {/* <img className="bg-gray-200 h-12 w-12 border-0 outline-0 ring-0" /> */}
 
-                                                <div className='ml-4 rounded-full bg-gray-200  dark:bg-gray-400 h-12 w-12 overflow-hidden '>
-                                                    <img className="bg-gray-200  rounded-full " />
+                                                {/* <div className='ml-4 rounded-full bg-gray-200 dark:bg-gray-400 h-12 w-12 overflow-hidden '>
+                                                    <img className="bg-gray-200 rounded-full" />
+                                                </div> */}
+                                                <div
+                                                    id='profile-image'
+                                                    className=" bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400 bg-origin-padding w-12 h-12 rounded-full"
+                                                    style={{ backgroundImage: `url(/storage/${user.avatar })`}}>
 
                                                 </div>
-                                            </button>
-                                        </span>
+                                            {/* </button> */}
+                                        {/* </span> */}
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
+                                        <Dropdown.Link id='logout' href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>
                                     </Dropdown.Content>

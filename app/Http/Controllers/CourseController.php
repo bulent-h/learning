@@ -22,7 +22,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Teacher/Partials/CreateCourse');
+        return Inertia::render('Course/CreateCourse');
     }
 
     /**

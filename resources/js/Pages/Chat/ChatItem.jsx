@@ -31,11 +31,7 @@ export default function ChatItem({ user, handleSelectChat }) {
                 <div>
                     <div className="bg-gray-200 dark:bg-gray-700 h-12 w-12 rounded-full"></div>
 
-                    {/* <img className="h-12 w-12 rounded-full" />
-                    <img className="h-12 w-12 rounded-full" /> */}
-
                 </div>
-                {/* <div className="ml-4 flex-1 w-1/12 py-4 text-gray-700 dark:text-gray-300 "> */}
                 <div className="ml-4 w-full py-4 text-gray-700 dark:text-gray-300 ">
 
                     <div className="grid grid-cols-3 gap-4 place-content-end font-semibold">
@@ -66,19 +62,11 @@ export default function ChatItem({ user, handleSelectChat }) {
                             </div>
                             :
                             <div className="grid grid-cols-4 gap-4">
-                                {/* <div className="mt-1 text-sm bg-gray-500 self-center rounded-full">
-                                    &nbsp;
-                                </div> */}
+
                                 <p className="col-span-3 mt-1 text-sm text-blue-300 truncate overflow-hidden">
                                     Loading ...
                                 </p>
-                                {/* <div className="lds-ellipsis mt-1 rounded-full">
-                                <div className="bg-gray-300" ></div>
-                                <div className="bg-gray-300" ></div>
-                                <div className="bg-gray-300" ></div>
-                                <div className="bg-gray-300" ></div>
 
-                            </div> */}
 
                             </div>
                     }
