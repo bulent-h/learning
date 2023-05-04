@@ -3,7 +3,7 @@ import { useForm } from '@inertiajs/react';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import EditCategory from '@/Pages/Category/EditCategory';
+import EditCategory from '@/Pages/Category/ManageCategory';
 import CreateCategory from '@/Pages/Category/CreateCategory';
 
 export default function Main({ auth,  }) {
@@ -61,7 +61,7 @@ export default function Main({ auth,  }) {
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
 
-                        <EditCategory ></EditCategory>
+                        <EditCategory getCategory={getCategory} ></EditCategory>
                     </div>
                 </div>
             </div>

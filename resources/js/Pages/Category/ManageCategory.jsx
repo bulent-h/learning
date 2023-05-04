@@ -12,21 +12,19 @@ import { router } from '@inertiajs/react'
 import CategoryItem  from '@/Pages/Category/CategoryItem'
 
 
-export default function EditCategory() {
+export default function EditCategory( ) {
 
     const [allCategory, setAllCategory] = useState();
     const [list, setList] = useState();
 
-    function handleEdit(id) {
-        console.log(id)
-    }
+
     function handleDelete(id) {
         console.log(id)
         axios.post(route('category.destroy'), { id: id })
             .then(response => {
                 if (response.status >= 200 && 299 >= response.status) {
                     // console.log(response.data);
-
+                    getCategory()
                 }
             })
             .catch(error => {
@@ -34,11 +32,12 @@ export default function EditCategory() {
                 console.log(error);
 
             })
+
     }
 
     function mapCategory() {
         setList(allCategory.map((category) =>
-            <CategoryItem key={category.id} category={category} handleEdit={()=>handleEdit(category.id)} handleDelete={()=>handleDelete(category.id)} ></CategoryItem>
+            <CategoryItem key={category.id} category={category} getCategory={getCategory} handleDelete={()=>handleDelete(category.id)} ></CategoryItem>
         ))
     }
 

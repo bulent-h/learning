@@ -14,7 +14,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $course = Course::all();
+        return $course;
     }
 
     /**
@@ -22,7 +23,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Course/CreateCourse');
+        return Inertia::render('Course/Main');
     }
 
     /**
@@ -32,7 +33,7 @@ class CourseController extends Controller
     {
         $request->validate([
             'category_id' => 'required|numeric|max:255',
-            'course_title' => 'required|string|max:255|unique:'.Course::class,
+            'course_title' => 'required|string|max:255|unique:' . Course::class,
             'course_description' => 'required|string|max:255'
 
         ]);
@@ -40,7 +41,7 @@ class CourseController extends Controller
         $course = Course::create([
             'creator_id' => $request->user()->id,
             'category_id' => $request->category_id,
-            'course_title' =>  $request->course_title,
+            'course_title' => $request->course_title,
             'course_description' => $request->course_description,
         ]);
 
@@ -75,8 +76,12 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function destroy(Request $request)
     {
-        //
+        $course = Course::find($request->id);
+
+        $course->delete();
+
+        return $course;
     }
 }

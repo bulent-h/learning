@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category=Category::all();
+        $category = Category::all();
         return $category;
     }
 
@@ -34,7 +34,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name' => 'required|string|max:255|unique:'.Category::class,
+            'category_name' => 'required|string|max:255|unique:' . Category::class,
         ]);
         $category = Category::create([
             'category_name' => $request->category_name,
@@ -55,9 +55,9 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit( Request $request)
     {
-        //
+
     }
 
     /**
@@ -65,7 +65,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
+        $category = Category::find($request->id);
+        $category->category_name = $request->category_name;
+        $category->save();
+        return $request;
+
     }
 
     /**
@@ -78,6 +83,6 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return  $category;
+        return $category;
     }
 }
