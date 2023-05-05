@@ -34,7 +34,7 @@ class CourseController extends Controller
         $request->validate([
             'category_id' => 'required|numeric|max:255',
             'course_title' => 'required|string|max:255|unique:' . Course::class,
-            'course_description' => 'required|string|max:255'
+            'course_description' => 'required|string|max:2048'
 
         ]);
         // return 'ok';

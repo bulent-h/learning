@@ -15,7 +15,7 @@ export default function ManageCourse() {
 
     function mapCourse() {
         setList(allCourse.map((course) =>
-            <CourseItem key={course.id} course={course} ></CourseItem>
+            <CourseItem key={course.id} course={course} getCourse={getCourse} ></CourseItem>
         ))
     }
 
@@ -38,16 +38,12 @@ export default function ManageCourse() {
         }
     },[allCourse])
     return (
-        <section className="max-w-xl">
+        <section className="max-w-full">
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
-
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Category
-                </p>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">All Courses</h2>
             </header>
 
-            <div className="max-h-full border-2 mt-8 rounded-lg bg-gray-200 dark:bg-gray-800 overflow-auto ">
+            <div className="max-h-full border-2 border-gray-300 dark:border-gray-600 mt-8 rounded-lg bg-gray-200 dark:bg-gray-800 overflow-auto ">
                 {list}
             </div>
 

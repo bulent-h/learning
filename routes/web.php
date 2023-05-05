@@ -63,7 +63,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/course/index', [CourseController::class, 'index'])->name('course.index');
     Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');
-    Route::post('/create/store', [CourseController::class, 'store'])->name('course.store');
+    Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
+    Route::post('/course/destroy', [CourseController::class, 'destroy'])->name('course.destroy');
+    Route::post('/course/update', [CourseController::class, 'update'])->name('course.update');
+
 });
 // Route::post('/course', [CourseController::class, 'store'])->name('course.store');
 

@@ -35,7 +35,6 @@ export default function CreateCourse( ) {
     }
     function submit(e) {
         e.preventDefault();
-        console.log(form);
         axios.post(route('course.store'), form, {
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -43,10 +42,7 @@ export default function CreateCourse( ) {
         })
             .then(response => {
                 if (response.status >= 200 && 299 >= response.status) {
-                    // fetchMessages(currentUserChat);
-                    console.log('ok');
-                    // addToMessageContainer(response.data);
-                    // clearInput();
+
                 }
             })
             .catch(error => {

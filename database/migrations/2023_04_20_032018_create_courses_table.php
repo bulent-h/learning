@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('creator_id');
             $table->bigInteger('category_id');
             $table->string('course_title')->unique();
-            $table->string('course_description');
+            $table->string('course_description',2048);
             $table->timestamps();
         });
     }
