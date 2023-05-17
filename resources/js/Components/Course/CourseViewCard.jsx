@@ -1,14 +1,19 @@
 import PrimaryButton from '@/Components/PrimaryButton';
-import { Link } from '@inertiajs/react';
 
 export default function CourseMangeCard({ course }) {
 
-    function handleEdit() {
+    function handleRegister() {
         console.log(course.id);
-    }
-
-    function handleManage() {
-
+        axios.post(route('course.register'), { id: course.id })
+            .then(response => {
+                if (response.status >= 200 && 299 >= response.status) {
+                    console.log('registered')
+                }
+            })
+            .catch(error => {
+                // validationErrors = error.response.data.errors;
+                console.log(error);
+            })
     }
 
     return (
@@ -16,7 +21,6 @@ export default function CourseMangeCard({ course }) {
             <div className='flex flex-col shrink-0 h-80 w-64 rounded-3xl m-2 '
                 style={{ backgroundImage: ' linear-gradient(to bottom right,#6C62CB,#CBFFFF)' }}
             >
-
                 <div className="basis-2/12 flex items-center text-lg mx-5 truncate overflow-hidden text-gray-900 dark:text-gray-100" >
                     {course.course_title}
                 </div>
@@ -27,14 +31,12 @@ export default function CourseMangeCard({ course }) {
                     {course.course_description}
                 </div>
                 <div className="basis-2/12 flex flex-rox justify-between items-center mx-5 my-3 text-gray-900 dark:text-gray-200" >
-                    <PrimaryButton onClick={handleEdit} className='mx-1'>
-                        Edit
+                    <PrimaryButton onClick={handleRegister} className='mx-1'>
+                        Register
                     </PrimaryButton>
-                    <PrimaryButton  className='mx-1'>
-                        <Link href={route('course.edit', { id: course.id })} >
-                            Manage
-                        </Link>
-                    </PrimaryButton>
+                    {/* <PrimaryButton onClick={handleManage} className='mx-1'>
+                        Mange
+                    </PrimaryButton> */}
 
                 </div>
             </div>

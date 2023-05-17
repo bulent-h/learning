@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\LessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,11 +66,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');
     Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
     Route::post('/course/destroy', [CourseController::class, 'destroy'])->name('course.destroy');
+    Route::post('/course/register', [CourseController::class, 'register'])->name('course.register');
+
     Route::post('/course/update', [CourseController::class, 'update'])->name('course.update');
 
-});
-// Route::post('/course', [CourseController::class, 'store'])->name('course.store');
+    Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
+    // Route::get('/course/{id}', [CourseController::class, 'view'])->name('course.view');
 
+});
+//Lesson
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/course/edit/{course_id}/index', [LessonController::class, 'index'])->name('lesson.index');
+    Route::get('/course/edit/{course_id}/create-lesson', [LessonController::class, 'create'])->name('lesson.create');
+    Route::post('/course/edit/{course_id}/create-lesson', [LessonController::class, 'store'])->name('lesson.store');
+
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+});
 
 // ++++++++++++++=======================chat
 Route::get('/chat', [ChatController::class, 'index'])->middleware(['auth', 'verified'])->name('chat');

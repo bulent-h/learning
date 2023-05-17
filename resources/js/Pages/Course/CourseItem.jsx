@@ -44,8 +44,8 @@ export default function CourseItem({ course, getCourse }) {
         return (
             <>
                 <div onClick={toggleReadMore} className={className}>
-                    {isReadMore ? text.slice(0, 150) : text}
-                    {(text.length > 150)
+                    {isReadMore ? text.slice(0, 100) : text}
+                    {(text.length > 100)
                         &&
                         <>
                             {isReadMore ?

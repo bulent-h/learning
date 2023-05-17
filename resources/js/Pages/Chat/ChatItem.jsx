@@ -27,7 +27,7 @@ export default function ChatItem({ user, handleSelectChat }) {
 
     return (
         <>
-            <div onClick={handleSelectChat} className="flex items-center border border-gray-200 bg-white dark:bg-gray-900 px-3 font-medium text-sm dark:border-gray-700 hover:bg-blue-100 cursor-pointer">
+            <div id="item" onClick={handleSelectChat} className="flex items-center border border-gray-200 bg-white dark:bg-gray-900 px-3 font-medium text-sm dark:border-gray-700 hover:bg-blue-100 cursor-pointer">
                 <div>
                     <div className="bg-gray-200 dark:bg-gray-700 h-12 w-12 rounded-full"></div>
 

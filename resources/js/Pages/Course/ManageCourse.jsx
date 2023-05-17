@@ -7,9 +7,9 @@ import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import CourseItem from '@/Pages/Course/CourseItem';
 
-export default function ManageCourse() {
+export default function ManageCourse({getCourse ,allCourse}) {
 
-    const [allCourse, setAllCourse] = useState();
+    // const [allCourse, setAllCourse] = useState();
     const [list, setList] = useState();
 
 
@@ -19,20 +19,8 @@ export default function ManageCourse() {
         ))
     }
 
-    async function getCourse() {
-        await axios.get(route('course.index'))
-            .then((data) => {
-                setAllCourse(data.data);
-                console.log(data.data);
-            }).catch(err => {
-                console.error(err);
-            })
-    }
 
     useEffect(()=>{
-        if (allCourse == undefined) {
-            getCourse()
-        }
         if (allCourse) {
             mapCourse()
         }

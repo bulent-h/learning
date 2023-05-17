@@ -2,8 +2,36 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import CourseMangeCard from '@/Components/Course/CourseMangeCard';
+import { useEffect, useState } from 'react';
 
 export default function Home({ auth }) {
+
+    const [courseCardList, setCourseCardList] = useState();
+    const [courses, setCourses] = useState();
+
+    function mapCourse() {
+        setCourseCardList(courses.map((course) =>
+            <CourseMangeCard key={course.id} course={course}></CourseMangeCard>
+        ))
+    }
+    async function getCourse() {
+        await axios.get(route('course.index'))
+            .then((data) => {
+                setCourses(data.data);
+                console.log(data.data)
+            }).catch(err => {
+                console.error(err);
+            })
+    }
+
+    useEffect(() => {
+        if (courses==undefined) {
+            getCourse()
+        }
+        if (courses) {
+            mapCourse()
+        }
+    }, [courses])
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -59,10 +87,7 @@ export default function Home({ auth }) {
 
                         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2 ' >
 
-                            <CourseMangeCard className=" " ></CourseMangeCard>
-                            <CourseMangeCard></CourseMangeCard>
-                            <CourseMangeCard></CourseMangeCard>
-                            <CourseMangeCard></CourseMangeCard>
+                            {courseCardList}
 
                         </div>
 

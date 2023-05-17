@@ -86,7 +86,7 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Message $message): RedirectResponse
+    public function destroy(Message $message,Request $request): RedirectResponse
     {
         $message=Message::where('id',$request->message_id)->get();
 

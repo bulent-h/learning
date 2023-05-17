@@ -15,47 +15,17 @@ export default function Main({ auth }) {
         course_title: '',
         course_description: ''
     });
-    const [allCategory, setAllCategory] = useState();
-    const [options, setOptions] = useState();
-    function mapOptions() {
-        setOptions(allCategory.map((category) =>
-            <option value={category.id} key={category.id}>{category.category_name}</option>
-        ))
-    }
+    const [allCourse, setAllCourse] = useState();
+    const [list, setList] = useState();
 
-    // const [allCategory,setAllCategory]=useState()
-    const { data, setData, errors, post, reset, processing, recentlySuccessful } = useForm({
-        category_name: '',
-        // all_category: '',
-    });
-    async function getCategory() {
-        await axios.get(route('category.index'))
+
+
+    async function getCourse() {
+        await axios.get(route('course.index'))
             .then((data) => {
-                setAllCategory(data.data)
+                setAllCourse(data.data);
             }).catch(err => {
                 console.error(err);
-            })
-    }
-    function submit(e) {
-        e.preventDefault();
-        console.log(form);
-        axios.post(route('course.store'), form, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            }
-        })
-            .then(response => {
-                if (response.status >= 200 && 299 >= response.status) {
-                    // fetchMessages(currentUserChat);
-                    console.log('ok');
-                    // addToMessageContainer(response.data);
-                    // clearInput();
-                }
-            })
-            .catch(error => {
-                // validationErrors = error.response.data.errors;
-                console.log(error);
-
             })
     }
     function handleChange(e) {
@@ -65,15 +35,13 @@ export default function Main({ auth }) {
         });
     }
     useEffect(() => {
-        if (allCategory == undefined) {
-            getCategory()
+        if (allCourse == undefined) {
+            getCourse()
         }
-        if (allCategory) {
-            mapOptions()
-        }
-    }, [allCategory])
-
-
+        // if (allCourse) {
+        //     mapCourse()
+        // }
+    }, [allCourse])
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -85,11 +53,11 @@ export default function Main({ auth }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                        <CreateCourse></CreateCourse>
+                        <CreateCourse getCourse={getCourse}></CreateCourse>
                     </div>
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                        <ManageCourse></ManageCourse>
+                        <ManageCourse getCourse={getCourse} allCourse={allCourse} ></ManageCourse>
                     </div>
 
                 </div>

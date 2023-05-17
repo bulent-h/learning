@@ -6,7 +6,7 @@ import { ChatContext } from '@/Pages/Chat/ChatContext';
 
 export default function ChatList({ users, handleSelectChat }) {
     let listItems;
-
+    const [searchText, setSearchText] = useState();
     const { auth, currentUserChat, fetchMessages } = useContext(ChatContext);
 
     if (users) {
@@ -14,10 +14,27 @@ export default function ChatList({ users, handleSelectChat }) {
             <ChatItem user={user} key={user.id} handleSelectChat={() => handleSelectChat(user)} />
         );
     }
+    function handleSearchChange(e) {
+        setSearchText(() => e.target.value.toUpperCase());
+        let txt = (e.target.value).toUpperCase();
+        console.log(txt)
+
+        let contacts = document.getElementById('contacts');
+        let item = contacts.querySelectorAll('#item');
+        for (let i = 0; i < item.length; ++i) {
+            let a = item[i].getElementsByTagName("i")[0];
+            if (a.innerHTML.toUpperCase().indexOf(txt) > -1) {
+                item[i].style.display = '';
+            }
+            else {
+                item[i].style.display = 'none';
+            }
+        }
+
+    }
 
     return (
         <>
-
             {/* <!-- Header --> */}
             <div className="py-2 px-3 border-none border-r-indigo-500 bg-indigo-500 dark:bg-gray-900 flex flex-row justify-between items-center ">
                 <Link href={route('profile.edit')}>
@@ -28,9 +45,7 @@ export default function ChatList({ users, handleSelectChat }) {
                         <div
                             className=" bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400 bg-origin-padding w-12 h-12 rounded-full"
                             style={{ backgroundImage: 'url(' + 'storage/' + auth.auth.user.avatar + ')' }}>
-
                         </div>
-
                     </div>
 
                 </Link>
@@ -77,7 +92,9 @@ export default function ChatList({ users, handleSelectChat }) {
                                 d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6 3 9.7s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.8l5.1 5.1 1.5-1.5-5-5.2zm-6.2 0c-2.6 0-4.6-2.1-4.6-4.6s2.1-4.6 4.6-4.6 4.6 2.1 4.6 4.6-2 4.6-4.6 4.6z">
                             </path>
                         </svg>
-                        <input type="text"
+                        <input
+                            onChange={handleSearchChange}
+                            type="text"
                             className="w-full bg-gray-100 dark:bg-gray-700 dark:text-gray-300 focus:border-gray-100 focus:ring-gray-100 text-sm focus:ring-0 border-0"
                             placeholder="Search" />
                     </div>
@@ -85,8 +102,8 @@ export default function ChatList({ users, handleSelectChat }) {
             </div>
 
             {/* Contacts */}
-            <div className="bg-gray-200 dark:bg-gray-800 overflow-auto" id="collection">
-                <div id="item">
+            <div className="bg-gray-200 dark:bg-gray-800 overflow-auto" id="contacts">
+                <div >
                     {/* <ChatItem /> */}
                     {listItems}
                 </div>

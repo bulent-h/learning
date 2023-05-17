@@ -5,17 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+
+
     public function index()
     {
-        $course = Course::all();
-        return $course;
+        $courses = Course::all();
+        foreach ($courses as $course) {
+
+            try {
+                $course->category;
+            } catch (ModelNotFoundException $e) {
+
+            }
+        }
+        return $courses;
+
+
     }
 
     /**
@@ -52,17 +65,19 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show(Course $id)
     {
-        //
+        return Inertia::render('StudentCourse/ViewCourse', ['course_id' => $id]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course)
+    public function edit(Request $request)
     {
-        //
+        $course = Course::find($request->id);
+
+        return Inertia::render('Course/Manage', ['course' => $course]);
     }
 
     /**
@@ -84,4 +99,23 @@ class CourseController extends Controller
 
         return $course;
     }
+
+    public function register(Request $request)
+    {
+        $user = $request->user();
+        $isExist = 0;
+        foreach ($user->courses as $course) {
+            if ($course->pivot->user_id == $user->id && $course->pivot->course_id == $request->id) {
+                $isExist = 1;
+            }
+
+        }
+
+        if (!$isExist) {
+            $user->courses()->attach($request->id);
+        } else {
+            return "already registered to the course";
+        }
+    }
+
 }

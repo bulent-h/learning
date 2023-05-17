@@ -6,7 +6,7 @@ import { Transition } from '@headlessui/react';
 import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
-export default function CreateCourse( ) {
+export default function CreateCourse({ getCourse }) {
     const [form, setForm] = useState({
         category_id: null,
         course_title: '',
@@ -21,10 +21,7 @@ export default function CreateCourse( ) {
     }
 
     // const [allCategory,setAllCategory]=useState()
-    const { data, setData, errors, post, reset, processing, recentlySuccessful } = useForm({
-        category_name: '',
-        // all_category: '',
-    });
+
     async function getCategory() {
         await axios.get(route('category.index'))
             .then((data) => {
@@ -42,7 +39,12 @@ export default function CreateCourse( ) {
         })
             .then(response => {
                 if (response.status >= 200 && 299 >= response.status) {
-
+                    getCourse()
+                    setForm({
+                        category_id: null,
+                        course_title: '',
+                        course_description: ''
+                    })
                 }
             })
             .catch(error => {
@@ -69,15 +71,16 @@ export default function CreateCourse( ) {
 
     return (
         <section className="max-w-xl">
-        <header>
-            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
+            <header>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                    Create Course
+                </h2>
 
-            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Category
-            </p>
-        </header>
+                {/* <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                </p> */}
+            </header>
 
-        {/* <InputSelector>
+            {/* <InputSelector>
             <InputSelector.Trigger>
                 <select
                     className=
@@ -105,62 +108,67 @@ export default function CreateCourse( ) {
             </InputSelector.Content>
         </InputSelector> */}
 
-        <form onSubmit={submit} className="mt-6 space-y-6">
+            <form onSubmit={submit} className="mt-6 space-y-6">
+                <div>
+                    <InputLabel htmlFor="category_id" value="Course Category" />
+                    <select
+                        required
+                        id='category_id'
+                        name='category_id'
+                        onChange={handleChange}
+                        className='mt-1 border-gray-300 block w-full dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm '
+                    >
+                        <option value=""> </option>
+                        {options}
+                    </select>
+                </div>
 
+                <div>
+                    <InputLabel htmlFor="course_title" value="Course Title" />
 
-            <select
-                id='category_id'
-                name='category_id'
-                onChange={handleChange}
-                className='border-gray-300 mt-1 block w-full dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm'>
-                <option value="">--Please choose an option--</option>
-                {options}
-            </select>
+                    <TextInput
+                        required
+                        id="course_title"
+                        name="course_title"
 
-            <div>
-                <InputLabel htmlFor="course_title" value="Course Title" />
+                        // ref={currentPasswordInput}
+                        // value={data.current_password}
+                        value={form.course_title}
+                        onChange={handleChange}
+                        type="text"
+                        className="mt-1 block w-full"
+                    />
+                    {/* <InputError message={errors.current_password} className="mt-2" /> */}
+                </div>
+                <div>
+                    <InputLabel htmlFor="course_description" value="Course Description" />
 
-                <TextInput
-                    id="course_title"
-                    name="course_title"
+                    <TextInput
+                        required
+                        id="course_description"
+                        name="course_description"
+                        // ref={currentPasswordInput}
+                        value={form.course_description}
+                        onChange={handleChange}
+                        type="text"
+                        className="mt-1 block w-full"
+                    />
+                    {/* <InputError message={errors.current_password} className="mt-2" /> */}
+                </div>
+                <div className="flex items-center gap-4">
+                    <PrimaryButton >Create</PrimaryButton>
 
-                    // ref={currentPasswordInput}
-                    // value={data.current_password}
-                    value={form.course_title}
-                    onChange={handleChange}
-                    type="text"
-                    className="mt-1 block w-full"
-                />
-                {/* <InputError message={errors.current_password} className="mt-2" /> */}
-            </div>
-            <div>
-                <InputLabel htmlFor="course_description" value="Course Description" />
-
-                <TextInput
-                    id="course_description"
-                    name="course_description"
-                    // ref={currentPasswordInput}
-                    value={form.course_description}
-                    onChange={handleChange}
-                    type="text"
-                    className="mt-1 block w-full"
-                />
-                {/* <InputError message={errors.current_password} className="mt-2" /> */}
-            </div>
-            <div className="flex items-center gap-4">
-                <PrimaryButton >Create</PrimaryButton>
-
-                <Transition
-                    // show={recentlySuccessful}
-                    show={true}
-                    enterFrom="opacity-0"
-                    leaveTo="opacity-0"
-                    className="transition ease-in-out"
-                >
-                    {/* <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p> */}
-                </Transition>
-            </div>
-        </form>
-    </section>
+                    <Transition
+                        // show={recentlySuccessful}
+                        show={true}
+                        enterFrom="opacity-0"
+                        leaveTo="opacity-0"
+                        className="transition ease-in-out"
+                    >
+                        {/* <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p> */}
+                    </Transition>
+                </div>
+            </form>
+        </section>
     );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
@@ -8,7 +8,6 @@ import DarkModeButton from '@/Components/DarkModeButton'
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -74,13 +73,13 @@ export default function Authenticated({ user, header, children }) {
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         {/* <span className="inline-flex rounded-md"> */}
-                                            {/* <button
+                                        {/* <button
                                                 type="button"
                                                 className="inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none "
                                             > */}
-                                                {/* {user.name} */}
+                                        {/* {user.name} */}
 
-                                                {/* <svg
+                                        {/* <svg
                                                     className="ml-2 -mr-0.5 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20"
@@ -92,18 +91,26 @@ export default function Authenticated({ user, header, children }) {
                                                         clipRule="evenodd"
                                                     />
                                                 </svg> */}
-                                                {/* <img className="bg-gray-200 h-12 w-12 border-0 outline-0 ring-0" /> */}
 
-                                                {/* <div className='ml-4 rounded-full bg-gray-200 dark:bg-gray-400 h-12 w-12 overflow-hidden '>
-                                                    <img className="bg-gray-200 rounded-full" />
+                                        {/* <div className='ml-4 rounded-full bg-gray-200 dark:bg-gray-400 h-12 w-12 overflow-hidden '>
                                                 </div> */}
-                                                <div
-                                                    id='profile-image'
-                                                    className=" bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400 bg-origin-padding w-12 h-12 rounded-full"
-                                                    style={{ backgroundImage: `url(/storage/${user.avatar })`}}>
 
-                                                </div>
-                                            {/* </button> */}
+
+
+                                            <div
+                                                id='profile-image'
+                                                className=" bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400 bg-origin-padding w-12 h-12 rounded-full"
+                                                style={(user.avatar ) &&{ backgroundImage: `url(/storage/${user.avatar})` }}>
+
+                                            </div>
+
+                                             {/* :
+                                            <img className="bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400 bg-origin-padding w-12 h-12 rounded-full" /> */}
+
+
+
+
+                                        {/* </button> */}
                                         {/* </span> */}
                                     </Dropdown.Trigger>
 
