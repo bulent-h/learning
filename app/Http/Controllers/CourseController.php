@@ -76,8 +76,7 @@ class CourseController extends Controller
     public function edit(Request $request)
     {
         $course = Course::find($request->id);
-
-        return Inertia::render('Course/Manage', ['course' => $course]);
+        return Inertia::render('Course/ManageCourse', ['course' => $course,'lessons'=>$course->lessons,'exams'=>$course->exams]);
     }
 
     /**
@@ -108,7 +107,6 @@ class CourseController extends Controller
             if ($course->pivot->user_id == $user->id && $course->pivot->course_id == $request->id) {
                 $isExist = 1;
             }
-
         }
 
         if (!$isExist) {

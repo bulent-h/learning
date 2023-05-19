@@ -58,24 +58,33 @@ class LessonController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Lesson $lesson)
+    public function edit(Request $request)
     {
-        //
+        $lesson = Lesson::find($request->lesson_id);
+        return Inertia::render('Lesson/EditLesson', ['lesson' => $lesson]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Lesson $lesson)
+    public function update(Request $request)
     {
-        //
-    }
 
+        $lesson = Lesson::find($request->lesson_id);
+        $lesson::update([
+            'lesson_title' => $request->lesson_title,
+            'lesson_description' => $request->lesson_description,
+            'video_path' => $request->video_path,
+        ]);
+        $lesson->save();
+    }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lesson $lesson)
+    public function destroy(Request $request)
     {
-        //
+        $lesson = Lesson::find($request->id);
+
+        $lesson->delete();
     }
 }

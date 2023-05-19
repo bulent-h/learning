@@ -40,6 +40,10 @@ class Course extends Model
     {
         return $this->hasMany(Lesson::class,'course_id');
     }
+    public function exams(): HasMany
+    {
+        return $this->hasMany(Exam::class,'course_id');
+    }
 
 
 }

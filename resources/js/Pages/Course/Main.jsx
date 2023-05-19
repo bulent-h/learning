@@ -6,7 +6,7 @@ import { Transition } from '@headlessui/react';
 import { Head, useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import CreateCourse from '@/Pages/Course/CreateCourse';
-import ManageCourse from '@/Pages/Course/ManageCourse';
+import ListCourse from '@/Pages/Course/ListCourse';
 
 
 export default function Main({ auth }) {
@@ -57,7 +57,7 @@ export default function Main({ auth }) {
                     </div>
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                        <ManageCourse getCourse={getCourse} allCourse={allCourse} ></ManageCourse>
+                        <ListCourse getCourse={getCourse} allCourse={allCourse} ></ListCourse>
                     </div>
 
                 </div>

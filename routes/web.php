@@ -9,6 +9,9 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\ExamController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\OptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,20 +79,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 //Lesson
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/course/edit/{course_id}/index', [LessonController::class, 'index'])->name('lesson.index');
+    // Route::get('/course/edit/{course_id}/index', [LessonController::class, 'index'])->name('lesson.index');
     Route::get('/course/edit/{course_id}/create-lesson', [LessonController::class, 'create'])->name('lesson.create');
     Route::post('/course/edit/{course_id}/create-lesson', [LessonController::class, 'store'])->name('lesson.store');
-
+    Route::post('/course/delete-lesson', [LessonController::class, 'destroy'])->name('lesson.destroy');
+    Route::get('/course/edit/{course_id}/edit-lesson/{lesson_id}', [LessonController::class, 'edit'])->name('lesson.edit');
+    Route::post('/course/update-lesson', [LessonController::class, 'update'])->name('lesson.update');
 });
-
+///Exam
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/course/edit/{course_id}/create-exam', [ExamController::class, 'create'])->name('exam.create');
+    Route::post('/course/edit/{course_id}/create-exam', [ExamController::class, 'store'])->name('exam.store');
+    Route::get('/course/edit/{course_id}/create-exam/{exam_id}', [ExamController::class, 'edit'])->name('exam.edit');
+    Route::post('/course/delete-exam', [ExamController::class, 'destroy'])->name('exam.destroy');
 
 });
+
+
+
+
+
+
 
 // ++++++++++++++=======================chat
 Route::get('/chat', [ChatController::class, 'index'])->middleware(['auth', 'verified'])->name('chat');
-
-
 
 Route::get('/getUsers', [ChatController::class, 'getUsers'])->name('chat.getUsers');
 
