@@ -1,14 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { useForm } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
-import Dropdown from '@/Components/Dropdown';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
-import { router } from '@inertiajs/react'
+
 import CategoryItem  from '@/Pages/Category/CategoryItem'
 
 

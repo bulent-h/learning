@@ -41,7 +41,7 @@ export default function MessageContainer({ messages }) {
         // <!--chat Header -->
         <>
 
-            <div className="py-2 px-3 flex  flex-row justify-between items-center bg-indigo-500 dark:bg-gray-900" >
+            <div className="py-2 px-3 flex flex-row justify-between items-center bg-indigo-500 dark:bg-gray-900" >
                 <div className="flex items-center">
                     <div>
                         {/* <img className="h-12 w-12 rounded-full" />

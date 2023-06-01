@@ -29,8 +29,11 @@ export default function ChatItem({ user, handleSelectChat }) {
         <>
             <div id="item" onClick={handleSelectChat} className="flex items-center border border-gray-200 bg-white dark:bg-gray-900 px-3 font-medium text-sm dark:border-gray-700 hover:bg-blue-100 cursor-pointer">
                 <div>
-                    <div className="bg-gray-200 dark:bg-gray-700 h-12 w-12 rounded-full"></div>
-
+                    <div
+                        id='profile-image'
+                        className=" bg-center bg-cover bg-no-repeat bg-gray-200 dark:bg-gray-400 bg-origin-padding w-12 h-12 rounded-full"
+                        style={(user.avatar) && { backgroundImage: `url(/storage/${user.avatar})` }}>
+                    </div>
                 </div>
                 <div className="ml-4 w-full py-4 text-gray-700 dark:text-gray-300 ">
 
@@ -62,12 +65,9 @@ export default function ChatItem({ user, handleSelectChat }) {
                             </div>
                             :
                             <div className="grid grid-cols-4 gap-4">
-
                                 <p className="col-span-3 mt-1 text-sm text-blue-300 truncate overflow-hidden">
                                     Loading ...
                                 </p>
-
-
                             </div>
                     }
                 </div>

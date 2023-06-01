@@ -13,6 +13,8 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\OptionController;
 
+use App\Http\Controllers\CommentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,10 +71,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');
     Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
     Route::post('/course/destroy', [CourseController::class, 'destroy'])->name('course.destroy');
-    Route::post('/course/register', [CourseController::class, 'register'])->name('course.register');
-
     Route::post('/course/update', [CourseController::class, 'update'])->name('course.update');
-
     Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
     // Route::get('/course/{id}', [CourseController::class, 'view'])->name('course.view');
 
@@ -81,7 +80,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/course/edit/{course_id}/index', [LessonController::class, 'index'])->name('lesson.index');
     Route::get('/course/edit/{course_id}/create-lesson', [LessonController::class, 'create'])->name('lesson.create');
-    Route::post('/course/edit/{course_id}/create-lesson', [LessonController::class, 'store'])->name('lesson.store');
+    Route::post('/course/edit/{course_id}/store-lesson', [LessonController::class, 'store'])->name('lesson.store');
     Route::post('/course/delete-lesson', [LessonController::class, 'destroy'])->name('lesson.destroy');
     Route::get('/course/edit/{course_id}/edit-lesson/{lesson_id}', [LessonController::class, 'edit'])->name('lesson.edit');
     Route::post('/course/update-lesson', [LessonController::class, 'update'])->name('lesson.update');
@@ -89,14 +88,38 @@ Route::middleware(['auth', 'verified'])->group(function () {
 ///Exam
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/course/edit/{course_id}/create-exam', [ExamController::class, 'create'])->name('exam.create');
-    Route::post('/course/edit/{course_id}/create-exam', [ExamController::class, 'store'])->name('exam.store');
+    Route::post('/course/edit/{course_id}/store-exam', [ExamController::class, 'store'])->name('exam.store');
     Route::get('/course/edit/{course_id}/create-exam/{exam_id}', [ExamController::class, 'edit'])->name('exam.edit');
     Route::post('/course/delete-exam', [ExamController::class, 'destroy'])->name('exam.destroy');
+
+});
+//Question
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/edit-exam/{exam_id}/index-question', [QuestionController::class, 'index'])->name('question.index');
+    Route::post('/edit-exam/store-question', [QuestionController::class, 'store'])->name('question.store');
+    Route::post('/edit-exam/update-question', [QuestionController::class, 'update'])->name('question.update');
+    Route::post('/edit-exam/destroy-question', [QuestionController::class, 'destroy'])->name('question.destroy');
+    Route::get('/edit-exam/show-question', [QuestionController::class, 'show'])->name('question.show');
+
+});
+//Student
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::post('/course/register', [CourseController::class, 'register'])->name('course.register');
+    Route::get('/my-courses', [CourseController::class, 'getMyCourses'])->name('course.mycourse');
+    Route::get('/course/view/{course_id}', [CourseController::class, 'show'])->name('course.show');
+    Route::get('/lesson/view/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
 
 });
 
 
 
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/lesson/view/{lesson_id}/comments', [CommentController::class, 'index'])->name('comments.index');
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::post('/comments/{comment}/reply', [CommentController::class, 'storeReply'])->name('comments.storeReply');
+});
 
 
 
@@ -115,7 +138,6 @@ Route::get('/chat/messages/{id}', [ChatController::class, 'getMessages'])->name(
 
 Route::get('/chat/user/lastMessage/{id}', [ChatController::class, 'getLastMessage'])->name('chat.getLastMessage');
 Route::post('/chat/message/send', [MessageController::class, 'store'])->name('chat.sendMessage');
-// Route::get('/chat/user/lastMessage/{id}', [ChatController::class, 'getLastMessage'])->name('chat.getLastMessage');
 
 // Route::post('/chat/message/delete',[MessageController::class, 'delete'])->name('chat.deleteMessage');
 

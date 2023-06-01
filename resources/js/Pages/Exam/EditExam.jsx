@@ -1,41 +1,34 @@
 import { useEffect, useRef, useState } from 'react';
-import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
-import Dropdown from '@/Components/Dropdown';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import QuestionList from '@/Pages/Question/QuestionList'
 
 export default function CreateExam({ CurrentExam, course, auth }) {
+
+    // function handleAddQuestion() {
+    //     const nextArtists = [
+    //         ...question,
+    //         {
+    //             id: nextId.current++,
+    //             text: currenQuestion,
+    //         }
+    //     ]
+    //     setQuestions(
+    //         nextArtists
+    //     );
+    // }
     let nextId = useRef(0);
 
     const [exam, setExam] = useState({
         title: CurrentExam.title,
         description: CurrentExam.description,
     });
-
     const [currenQuestion, setCurrenQuestion] = useState('');
-
-    const [question, setQuestion] = useState([]);
-
-    function handleAddQuestion() {
-        const nextArtists = [
-            ...question,
-            {
-                id: nextId.current++,
-                text: currenQuestion,
-            }
-        ]
-        setQuestion(
-            nextArtists
-        );
-        console.log(question)
-    }
-
-
+    const [questions, setQuestions] = useState();
     function submit(e) {
         e.preventDefault();
         console.log(exam);
@@ -60,6 +53,47 @@ export default function CreateExam({ CurrentExam, course, auth }) {
             [e.target.name]: e.target.value
         });
     }
+    async function handleCreateQuestion() {
+        await axios.post(route('question.store'), { exam_id: CurrentExam.id, question_text: currenQuestion })
+            .then((data) => {
+                setCurrenQuestion('')
+                getQuestions();
+
+            }).catch(err => {
+
+                console.error(err);
+            })
+    }
+
+    async function getQuestions() {
+        await axios.get(route('question.index', { exam_id: CurrentExam.id }))
+            .then((data) => {
+                setQuestions(data.data.reverse());
+            }).catch(err => {
+                console.error(err);
+            })
+    }
+    async function getSingleQuestion(id) {
+
+        const nextArr= [...questions]
+        var targetObj = nextArr.find(obj => obj.id === id);
+        console.log(nextArr);
+
+        await axios.get(route('question.show', { question_id: id }))
+            .then((data) => {
+                targetObj=data.data;
+                setQuestions(nextArr);
+                // console.log(data.data)
+            }).catch(err => {
+                console.error(err);
+            })
+    }
+    useEffect(() => {
+        if (questions== undefined) {
+            getQuestions();
+        }
+
+    }, []);
 
     return (
 
@@ -70,7 +104,7 @@ export default function CreateExam({ CurrentExam, course, auth }) {
             <Head title="Profile" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
+                    <button onClick={()=>getSingleQuestion(20)} > vklejkl</button>
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
 
                         <section className="max-w-xl">
@@ -78,7 +112,6 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Exam for {course.course_title}</h2>
                             </header>
                             <form onSubmit={submit} className="mt-6 space-y-6">
-
                                 <div>
                                     <InputLabel htmlFor="title" value="Exam Title" />
 
@@ -104,8 +137,7 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                         className="mt-1 block w-full"
                                     />
                                 </div>
-
-                                <div className="flex items-center gap-4">
+                                {/* <div className="flex items-center gap-4">
                                     <PrimaryButton >Create</PrimaryButton>
 
                                     <Transition
@@ -115,11 +147,20 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                         className="transition ease-in-out"
                                     >
                                     </Transition>
-                                </div>
-
+                                </div> */}
                             </form>
+                        </section>
+                    </div>
 
-                            <button onClick={handleAddQuestion}>
+
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+
+                        <section className="max-w-xl">
+                            <header>
+                                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Exam for {course.course_title}</h2>
+                            </header>
+
+                            <button onClick={handleCreateQuestion}>
                                 <div className='flex flex-col  shrink-0 place-items-center  w-48 rounded-3xl m-2 '
 
                                     style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
@@ -142,12 +183,17 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                 className="mt-1 block w-full"
                             />
 
+                            <div className="max-h-full border-2 mt-8 rounded-lg bg-gray-200 dark:bg-gray-800 overflow-auto ">
+
+                                <QuestionList exam={exam} questions={questions} getQuestions={getQuestions} > </QuestionList>
+
+                            </div>
+
                         </section>
-
-
                     </div>
                 </div>
             </div>
+
         </AuthenticatedLayout>
 
 

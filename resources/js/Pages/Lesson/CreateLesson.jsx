@@ -47,32 +47,7 @@ export default function CreateLesson({ course, auth }) {
         });
     }
 
-    // function handleVideoPath(e) {
-    //     function getId(url) {
-    //         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    //         const match = url.match(regExp);
 
-    //         return (match && match[2].length === 11)
-    //             ? match[2]
-    //             : null;
-    //     }
-
-    //     const videoId = 'https://www.youtube.com/embed/' + getId( e.target.value);
-    //     const iframeMarkup = <iframe width="967" height="544"
-    //         src={videoId}
-    //         title="Automate with Python – Full Course for Beginners"
-    //         frameBorder="0"
-    //         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    //         allowFullScreen>
-    //     </iframe>;
-
-    //     // console.log('Video ID:', videoId)
-
-    //     setForm({
-    //         ...form,
-    //         [e.target.name]: e.target.value
-    //     });
-    // }
 
 
     return (

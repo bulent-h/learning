@@ -3,31 +3,16 @@ import { Head } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import LessonStudentCard from '@/Components/Lesson/LessonStudentCard';
 import ExamStudentCard from '@/Components/Exam/ExamStudentCard';
+import YoutubeEmbed from '@/Components/YoutubeEmbed';
+import Comments from '@/Pages/Comment/Comments';
 
-export default function ViewCourse({ auth, course, lessons, exams }) {
-
-    const [lessonList, setLessonList] = useState();
-    const [examList, setExamList] = useState();
-
-    function mapLesson() {
-        setLessonList(lessons.map((lesson) =>
-            <LessonStudentCard key={lesson.id} lesson={lesson}></LessonStudentCard>
-        ))
-    }
-    function mapExam() {
-        setExamList(exams.map((exam) =>
-            <ExamStudentCard key={exam.id} exam={exam}></ExamStudentCard>
-        ))
-    }
+export default function ViewCourse({ auth, lesson }) {
 
     useEffect(() => {
+        if (lesson) {
 
-        if (course) {
-            mapLesson()
-            console.log(course)
         }
-    }, [course])
-
+    }, [lesson])
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -39,12 +24,16 @@ export default function ViewCourse({ auth, course, lessons, exams }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                         <section className="max-w-full">
-                            <div className='mb-6 text-black dark:text-white text-xl' > My Classes</div>
+                            <div className='mb-6 text-black dark:text-white text-3xl font-bold'>{lesson?.lesson_title}</div>
+                            <div className='flex flex-col'>
+                                <YoutubeEmbed video_path={lesson.video_path}></YoutubeEmbed>
+                                <div className='py-4'>
+                                    <div className='mb-6 text-black dark:text-white text-xl font-bold'>Description</div>
 
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2 ' >
-                                {lessonList}
+                                    {lesson.lesson_description}
+                                </div>
+                                <Comments lessonId={lesson.id} ></Comments>
                             </div>
-
                         </section >
 
                     </div>

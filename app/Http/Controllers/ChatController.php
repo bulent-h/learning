@@ -30,7 +30,6 @@ class ChatController extends Controller
 
     public function getUsers(){
         $users=User::all();
-        // dd($users->setVisible(['id', 'name']));
         return $users->setVisible(['id', 'name','avatar']) ;
     }
     public function getLastMessage(Request $request ,$id)

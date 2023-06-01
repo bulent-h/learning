@@ -12,11 +12,11 @@ class LessonController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($course_id)
-    {
-        $course = Course::find($course_id);
-        return $course->lessons;
-    }
+    // public function index($course_id)
+    // {
+    //     $course = Course::find($course_id);
+    //     return $course->lessons;
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -50,9 +50,11 @@ class LessonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Lesson $lesson)
+    public function show(Request $request)
     {
-        //
+        $lesson = Lesson::find($request->lesson_id);
+
+        return Inertia::render('StudentCourse/ViewLesson', ['lesson' => $lesson]);
     }
 
     /**
@@ -71,7 +73,7 @@ class LessonController extends Controller
     {
 
         $lesson = Lesson::find($request->lesson_id);
-        $lesson::update([
+        $lesson->update([
             'lesson_title' => $request->lesson_title,
             'lesson_description' => $request->lesson_description,
             'video_path' => $request->video_path,

@@ -41,7 +41,7 @@ export default function MessageItem({ message }) {
                             </div>
                             <p className="text-right text-xs text-gray-500 dark:text-gray-400 mt-1">
                                 {
-                                dayjs(message.updated_at).fromNow()
+                                    dayjs(message.updated_at).fromNow()
                                 }
                             </p>
                         </div>
@@ -60,7 +60,7 @@ export default function MessageItem({ message }) {
                                 <img alt="" />
                             </div>
                             <p className="text-right text-xs text-gray-500 mt-1 dark:text-gray-400">
-                                {message.updated_at}
+                                {dayjs(message.updated_at).fromNow()}
                             </p>
                         </div>
                     </div>

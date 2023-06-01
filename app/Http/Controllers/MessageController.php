@@ -44,19 +44,12 @@ class MessageController extends Controller
         $message->receiver_user_id=(int)$request->receiver_id;
         $message->text_content=$request->text;
 
-
         if($request->hasFile('file')){
-
             $message->media_content_path = $request->file('file')->store('media','public');
-
         }
         $message->save();
-
         broadcast(new NewMessage($message));
-
         return $message;
-
-
     }
 
     /**

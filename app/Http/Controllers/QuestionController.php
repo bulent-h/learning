@@ -10,9 +10,10 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $questions = Question::where('exam_id',$request->exam_id)->get();
+        return response()->json($questions);
     }
 
     /**
@@ -20,7 +21,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -28,15 +29,21 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $question = Question::create([
+            'exam_id' => $request->exam_id,
+            'question_text' => $request->question_text,
+        ]);
+        return response()->json($question, 201);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Question $question)
+    public function show(Request $request)
     {
-        //
+        $question = Question::findOrFail($request->question_id);
+        return response()->json($question);
     }
 
     /**
@@ -50,16 +57,24 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request)
     {
-        //
+        $question = Question::findOrFail($request->question_id);
+
+        $question->update([
+            'question_text' => $request->question_text,
+        ]);
+        return response()->json($question, 201);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy(Request $request)
     {
-        //
+        $question = Question::find($request->question_id);
+
+        $question->delete();
     }
 }
