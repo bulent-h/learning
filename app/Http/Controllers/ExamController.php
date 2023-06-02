@@ -45,9 +45,11 @@ class ExamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Exam $exam)
+    public function show(Request $request)
     {
-        //
+        $exam = exam::find($request->lesson_id);
+
+        return Inertia::render('StudentCourse/ViewExam', ['exam' => $exam]);
     }
 
     /**

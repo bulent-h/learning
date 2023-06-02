@@ -102,6 +102,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/edit-exam/show-question', [QuestionController::class, 'show'])->name('question.show');
 
 });
+//Option
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/edit-question/{question_id}/index-option', [OptionController::class, 'index'])->name('option.index');
+    Route::post('/edit-question/store-option', [OptionController::class, 'store'])->name('option.store');
+    Route::post('/edit-question/update-option', [OptionController::class, 'update'])->name('option.update');
+    Route::post('/edit-question/destroy-option', [OptionController::class, 'destroy'])->name('option.destroy');
+    Route::get('/edit-question/show-option', [OptionController::class, 'show'])->name('option.show');
+
+});
 //Student
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -109,6 +118,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/my-courses', [CourseController::class, 'getMyCourses'])->name('course.mycourse');
     Route::get('/course/view/{course_id}', [CourseController::class, 'show'])->name('course.show');
     Route::get('/lesson/view/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
+    Route::get('/exam/view/{exam_id}', [ExamController::class, 'show'])->name('exam.show');
+
 
 });
 

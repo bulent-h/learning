@@ -10,9 +10,10 @@ class OptionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $option = Option::where('question_id',$request->question_id)->get();
+        return response()->json($option);
     }
 
     /**
@@ -28,15 +29,22 @@ class OptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $option = Option::create([
+            'question_id' => $request->question_id,
+            'option_text' => $request->option_text,
+            'is_correct'=>$request->is_correct,
+        ]);
+        return response()->json($option, 201);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Option $option)
+    public function show(Request $request)
     {
-        //
+        $option = Option::findOrFail($request->option_id);
+        return response()->json($option);
     }
 
     /**
@@ -50,16 +58,25 @@ class OptionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Option $option)
+    public function update(Request $request)
     {
-        //
+        $option = Option::findOrFail($request->option_id);
+
+        $option->update([
+            'option_text' => $request->option_text,
+            'is_correct'=>$request->is_correct,
+
+        ]);
+        return response()->json($option, 201);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Option $option)
+    public function destroy(Request $request)
     {
-        //
+        $option = Option::find($request->option_id);
+
+        $option->delete();
     }
 }

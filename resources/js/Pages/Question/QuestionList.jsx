@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import QuestionItem from '@/Pages/Question/QuestionItem'
 
 
-export default function QuestionList({ exam, questions ,getQuestions}) {
+export default function QuestionList({ exam, questions, getQuestions, getSingleQuestion }) {
 
     // const [questions, setQuestions] = useState();
     const [list, setList] = useState();
@@ -11,7 +11,7 @@ export default function QuestionList({ exam, questions ,getQuestions}) {
 
     function handleDelete(id) {
         console.log(id)
-        axios.post(route('question.destroy',{exam_id:exam.id}), { question_id: id })
+        axios.post(route('question.destroy', { exam_id: exam.id }), { question_id: id })
             .then(response => {
                 if (response.status >= 200 && 299 >= response.status) {
                     getQuestions();
@@ -24,27 +24,31 @@ export default function QuestionList({ exam, questions ,getQuestions}) {
 
     function mapQuestions() {
         setList(questions.map((question) =>
-            <QuestionItem key={question.id} question={question} handleDelete={() => handleDelete(question.id)} ></QuestionItem>
+            <QuestionItem key={question.id}
+                question={question}
+                handleDelete={() => handleDelete(question.id)}
+                getSingleQuestion={() => getSingleQuestion(question.id)} >
+            </QuestionItem>
         ))
     }
 
+
     useEffect(() => {
-        if(questions){
+        if (questions) {
             mapQuestions();
-            console.log(questions)
         }
     }, [questions]);
 
     return (
 
-        <section className="max-w-xl">
+        <section className="max-full">
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100"> All Questions
+                <h2 className="text-base text-gray-900 dark:text-gray-100">
+                    Questions
                 </h2>
-
             </header>
 
-            <div className="max-h-full mt-8 rounded-lg bg-gray-200 dark:bg-gray-800 overflow-auto ">
+            <div className=" max-h-full mt-4 rounded-lg overflow-auto ">
 
                 {list}
 

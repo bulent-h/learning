@@ -58,7 +58,7 @@ export default function Comments({ lessonId }) {
             <div className='mb-6 text-black dark:text-white text-xl font-bold' >Comments</div>
             <CommentForm onCommentSubmit={handleCommentSubmit} lessonId={lessonId} />
 
-            <div className='bg-grey-100 px-4 py-4  mx-5  border-y-2 border-gray-200 dark:border-gray-900'>
+            <div className='bg-grey-100 px-4 py-4  mx-5  border-y-2 border-gray-300 dark:border-gray-700'>
                 <div className="flex-1 overflow-auto h-96">
                     {comments.map((comment) => (
 

@@ -9,7 +9,6 @@ class Question extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'question_text' ,
         'exam_id'
@@ -24,4 +23,5 @@ class Question extends Model
     {
         return $this->hasMany(Option::class);
     }
+
 }

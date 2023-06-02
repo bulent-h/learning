@@ -27,7 +27,7 @@ export default function CourseMangeCard({ course }) {
                 <div className="basis-1/12 flex items-center mx-5 text-sm text-blue-900 dark:text-blue-100">
                     {course?.category?.category_name}
                 </div>
-                <div className="basis-7/12 text-ellipsis overflow-auto mx-5  text-sm text-gray-100 dark:text-gray-900" >
+                <div className="basis-7/12 text-ellipsis overflow-auto mx-5 text-sm text-gray-100 dark:text-gray-900" >
                     {course.course_description}
                 </div>
                 <div className="basis-2/12 flex flex-rox justify-between items-center mx-5 my-3 text-gray-900 dark:text-gray-200" >

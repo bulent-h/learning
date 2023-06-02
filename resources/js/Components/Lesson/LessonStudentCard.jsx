@@ -26,7 +26,7 @@ export default function LessonStudentCard({ lesson }) {
                 >
                     <div className='flex justify-center items-center h-full overflow-auto m-3'>
 
-                        <div className="basis-12/12 text-ellipsis  overflow-auto  text-lg text-gray-900 dark:text-gray-100" >
+                        <div className="basis-12/12 text-ellipsis  overflow-auto text-gray-900 dark:text-gray-100" >
                                 {lesson.lesson_title}
                         </div>
                     </div>

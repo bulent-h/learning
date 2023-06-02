@@ -30,7 +30,11 @@ export default function ViewCourse({ auth, lesson }) {
                                 <div className='py-4'>
                                     <div className='mb-6 text-black dark:text-white text-xl font-bold'>Description</div>
 
-                                    {lesson.lesson_description}
+                                    <div className='mb-6 text-gray-900 dark:text-gray-200'>
+                                        {lesson.lesson_description}
+
+                                    </div>
+
                                 </div>
                                 <Comments lessonId={lesson.id} ></Comments>
                             </div>
