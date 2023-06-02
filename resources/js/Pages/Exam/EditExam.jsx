@@ -6,6 +6,8 @@ import { useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import QuestionList from '@/Pages/Question/QuestionList'
+import { Transition } from '@headlessui/react';
+import InputError from '@/Components/InputError';
 
 export default function CreateExam({ CurrentExam, course, auth }) {
 
@@ -13,33 +15,47 @@ export default function CreateExam({ CurrentExam, course, auth }) {
     let nextId = useRef(0);
     const [currenQuestion, setCurrenQuestion] = useState('');
     const [questions, setQuestions] = useState();
-    const [exam, setExam] = useState({
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm({
+
         title: CurrentExam.title,
         description: CurrentExam.description,
+        is_open: CurrentExam.is_open,
     });
-    function submit(e) {
+    // function submit(e) {
+    //     e.preventDefault();
+    //     // console.log(exam);
+
+    //     axios.post(route('exam.update', { exam_id: CurrentExam.id }), data, {
+    //         headers: {
+    //             "Content-Type": "multipart/form-data",
+    //         }
+    //     })
+    //         .then(response => {
+    //             if (response.status >= 200 && 299 >= response.status) {
+
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    // }
+    const submit = (e) => {
         e.preventDefault();
-        console.log(exam);
-
-        axios.post(route('exam.update', { exam_id: exam.id }), exam, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            }
-        })
-            .then(response => {
-                if (response.status >= 200 && 299 >= response.status) {
-
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }
+        post(route('exam.update', { exam_id: CurrentExam.id }));
+    };
     function handleChange(e) {
-        setExam({
-            ...exam,
+        setData({
+            ...data,
             [e.target.name]: e.target.value
         });
+    }
+    function handleCheckbox(){
+        if(data.is_open === 0){
+            setData('is_open', 1)
+        }
+        else{
+            setData('is_open', 0)
+        }
     }
     async function handleCreateQuestion() {
         await axios.post(route('question.store'), { exam_id: CurrentExam.id, question_text: currenQuestion })
@@ -66,9 +82,9 @@ export default function CreateExam({ CurrentExam, course, auth }) {
         const nextArr = [...questions]
         var targetObj = nextArr.findIndex(obj => obj.id === id);
 
-         axios.get(route('question.show', { question_id: id }))
+        axios.get(route('question.show', { question_id: id }))
             .then((data) => {
-                nextArr[targetObj]=data.data;
+                nextArr[targetObj] = data.data;
                 // targetObj = data.data;
                 console.log(nextArr);
 
@@ -83,7 +99,7 @@ export default function CreateExam({ CurrentExam, course, auth }) {
             getQuestions();
         }
 
-    },[questions]);
+    }, [questions]);
 
     return (
 
@@ -106,14 +122,16 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                     <InputLabel htmlFor="title" value="Exam Title" />
 
                                     <TextInput
-                                        required
+                                        // required
                                         id="title"
                                         name="title"
-                                        value={exam.title}
+                                        value={data.title}
                                         onChange={handleChange}
                                         type="text"
                                         className="mt-1 block w-full"
                                     />
+                                    <InputError className="mt-2" message={errors.title} />
+
                                 </div>
                                 <div>
                                     <InputLabel htmlFor="description" value="Lesson Description" />
@@ -121,23 +139,35 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                     <TextInput
                                         id="description"
                                         name="description"
-                                        value={exam.description}
+                                        value={data.description}
                                         onChange={handleChange}
                                         type="text"
                                         className="mt-1 block w-full"
                                     />
                                 </div>
-                                {/* <div className="flex items-center gap-4">
-                                    <PrimaryButton >Create</PrimaryButton>
 
+                                <div className="flex items-center gap-4">
+                                    <TextInput
+                                    // className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        id="is_open" type="checkbox" value=""
+                                        name="is_open"
+                                        checked={data.is_open === 1}
+                                        onChange={handleCheckbox}
+                                    />
+                                    <InputLabel htmlFor="is_open" value="Is open" />
+                                </div>
+
+                                <div className="flex items-center gap-4">
+                                    <PrimaryButton >Save</PrimaryButton>
+                                    {/*
                                     <Transition
                                         show={true}
                                         enterFrom="opacity-0"
                                         leaveTo="opacity-0"
                                         className="transition ease-in-out"
                                     >
-                                    </Transition>
-                                </div> */}
+                                    </Transition> */}
+                                </div>
                             </form>
                         </section>
                     </div>
@@ -179,7 +209,7 @@ export default function CreateExam({ CurrentExam, course, auth }) {
 
                             <div className="max-h-full  mt-8 rounded-lg bg-white dark:bg-gray-800 overflow-auto ">
 
-                                <QuestionList exam={exam}
+                                <QuestionList CurrentExam={CurrentExam}
                                     questions={questions}
                                     getQuestions={getQuestions}
                                     getSingleQuestion={getSingleQuestion}>

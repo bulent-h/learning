@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Models\Course;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class ExamController extends Controller
 {
@@ -48,7 +49,6 @@ class ExamController extends Controller
     public function show(Request $request)
     {
         $exam = exam::find($request->lesson_id);
-
         return Inertia::render('StudentCourse/ViewExam', ['exam' => $exam]);
     }
 
@@ -61,20 +61,31 @@ class ExamController extends Controller
         $exam = Exam::findOrFail($request->exam_id);
 
         return Inertia::render('Exam/EditExam', ['CurrentExam'=> $exam,'course'=>$course ]);
-
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Exam $exam)
+    public function update(Request $request)
     {
+
+        // return $request;
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'is_open' => 'required|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $exam = Exam::findOrFail($request->exam_id);
         $exam->update([
             'title' => $request->title,
             'description' => $request->description,
+            'is_open' => $request->is_open,
         ]);
-
     }
 
     /**

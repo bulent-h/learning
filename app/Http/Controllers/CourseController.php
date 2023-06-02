@@ -45,8 +45,9 @@ class CourseController extends Controller
     public function show(Request $request)
     {
         $course = Course::find($request->course_id);
+        $exams = $course->exams()->where('is_open', '1')->get();
 
-        return Inertia::render('StudentCourse/ViewCourse', ['course' => $course, 'lessons' => $course->lessons, 'exams' => $course->exams]);
+        return Inertia::render('StudentCourse/ViewCourse', ['course' => $course, 'lessons' => $course->lessons, 'exams' => $exams]);
     }
 
     /**

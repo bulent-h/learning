@@ -35,7 +35,6 @@ export default function CategoryItem({ option, handleDelete, getSingleOption }) 
 
             })
     }
-    console.log(option)
 
     return (
         <>

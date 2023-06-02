@@ -73,10 +73,6 @@ export default function CategoryItem({ question, handleDelete, getSingleQuestion
         axios.get(route('option.index', { question_id: question.id }))
             .then((data) => {
                 setOptions(data.data.reverse());
-                console.log(data.data.reverse());
-                console.log("lkflke");
-
-
             }).catch(err => {
                 console.error(err);
             })
