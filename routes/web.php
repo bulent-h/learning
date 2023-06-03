@@ -115,10 +115,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/course/view/{course_id}', [CourseController::class, 'show'])->name('course.show');
     Route::get('/lesson/view/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
     Route::get('/exam/view/{exam_id}', [ExamController::class, 'show'])->name('exam.show');
+    Route::post('/submit-exam/{exam_id}', [ExamController::class, 'submit'])->name('exam.submit');
+
 });
 
-
-
+//Comment
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/lesson/view/{lesson_id}/comments', [CommentController::class, 'index'])->name('comments.index');

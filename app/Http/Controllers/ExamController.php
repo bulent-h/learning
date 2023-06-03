@@ -9,6 +9,7 @@ use App\Models\Course;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use App\Models\UserResponse;
 
 class ExamController extends Controller
 {
@@ -40,7 +41,7 @@ class ExamController extends Controller
             'description' => $request->description,
         ]);
 
-        return Redirect::route('exam.edit', ['exam_id' => $exam->id,'course_id'=>$request->course_id]);
+        return Redirect::route('exam.edit', ['exam_id' => $exam->id, 'course_id' => $request->course_id]);
     }
 
     /**
@@ -48,8 +49,19 @@ class ExamController extends Controller
      */
     public function show(Request $request)
     {
-        $exam = exam::find($request->lesson_id);
+        // $exam = Exam::findOrFail($request->exam_id);
+        // $exam = Exam::with('questions.options')->findOrFail($request->exam_id);
+        $exam = Exam::with([
+            'questions.options' => function ($query) {
+                $query->select('id', 'question_id', 'option_text');
+            }
+        ])->findOrFail($request->exam_id);
+
+        if (!$exam || $exam->is_open !== 1) {
+            return redirect()->back()->with('error', 'The exam is not available.');
+        }
         return Inertia::render('StudentCourse/ViewExam', ['exam' => $exam]);
+
     }
 
     /**
@@ -60,7 +72,7 @@ class ExamController extends Controller
         $course = Course::findOrFail($request->course_id);
         $exam = Exam::findOrFail($request->exam_id);
 
-        return Inertia::render('Exam/EditExam', ['CurrentExam'=> $exam,'course'=>$course ]);
+        return Inertia::render('Exam/EditExam', ['CurrentExam' => $exam, 'course' => $course]);
     }
 
     /**
@@ -96,6 +108,25 @@ class ExamController extends Controller
         $exam = Exam::findOrFail($request->exam_id);
         $exam->delete();
         return response()->json(null, 204);
+    }
+
+    public function submit(Request $request)
+    {
+        $userId = $request->user()->id;
+        $answers = $request->input('answers');
+        $exam_id= $request->exam_id;
+
+        foreach ($answers as $questionId => $selectedOptionId) {
+            UserResponse::updateOrCreate([
+                'exam_id'=>$exam_id,
+                'user_id' => $userId,
+                'question_id' => $questionId,
+            ], [
+                    'option_id' => $selectedOptionId,
+                ]);
+        }
+
+        return response()->json(['message' => 'Answers saved successfully']);
 
     }
 }

@@ -6,7 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 
 import { useEffect, useRef, useState } from 'react';
 
-export default function CategoryItem({ question, handleDelete, getSingleQuestion }) {
+export default function QuestionItem({ question, handleDelete, getSingleQuestion }) {
 
     const [toggleEdit, setToggleEdit] = useState(true);
     const [questionTmp, setQuestionTmp] = useState();
