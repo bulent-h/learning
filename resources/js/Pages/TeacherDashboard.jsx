@@ -11,7 +11,7 @@ export default function Home({ auth }) {
 
     function mapCourse() {
         setCourseCardList(courses.map((course) =>
-            <CourseMangeCard key={course.id} course={course}></CourseMangeCard>
+            <CourseMangeCard key={course.id} course={course} ></CourseMangeCard>
         ))
     }
     async function getCourse() {

@@ -1,6 +1,6 @@
 import PrimaryButton from '@/Components/PrimaryButton';
 
-export default function CourseMangeCard({ course }) {
+export default function CourseMangeCard({ course ,getCourse}) {
 
     function handleRegister() {
         console.log(course.id);
@@ -8,6 +8,7 @@ export default function CourseMangeCard({ course }) {
             .then(response => {
                 if (response.status >= 200 && 299 >= response.status) {
                     console.log('registered')
+                    getCourse()
                 }
             })
             .catch(error => {

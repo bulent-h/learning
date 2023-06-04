@@ -2,14 +2,15 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import DangerButton from '@/Components/DangerButton';
 import { Link } from '@inertiajs/react';
 
-export default function CourseMangeCard({ course }) {
+export default function CourseMangeCard({ getCourse,course }) {
 
-    function handleRegister() {
+    function handleUnregister() {
         console.log(course.id);
-        axios.post(route('course.register'), { id: course.id })
+        axios.post(route('course.unregister'), { id: course.id })
             .then(response => {
                 if (response.status >= 200 && 299 >= response.status) {
-                    console.log('registered')
+                    console.log('unregistered')
+                    getCourse()
                 }
             })
             .catch(error => {
@@ -17,9 +18,7 @@ export default function CourseMangeCard({ course }) {
                 console.log(error);
             })
     }
-    function handleView() {
 
-    }
     return (
         <>
             <div className='flex flex-col shrink-0 h-80 w-64 rounded-3xl m-2 '
@@ -35,10 +34,10 @@ export default function CourseMangeCard({ course }) {
                     {course.course_description}
                 </div>
                 <div className="basis-2/12 flex flex-rox justify-between items-center mx-5 my-3 text-gray-900 dark:text-gray-200" >
-                    <DangerButton onClick={handleRegister} className='mx-1'>
+                    <DangerButton onClick={handleUnregister} className='mx-1'>
                         Unregister
                     </DangerButton>
-                    <PrimaryButton onClick={handleView} className='mx-1'>
+                    <PrimaryButton className='mx-1'>
                         <Link href={route('course.show', { course_id: course.id })} >
                             View
                         </Link>

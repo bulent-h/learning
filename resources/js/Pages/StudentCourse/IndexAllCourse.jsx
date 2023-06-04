@@ -11,11 +11,11 @@ export default function Home({ auth }) {
 
     function mapCourse() {
         setCourseCardList(courses.map((course) =>
-            <CourseViewCard key={course.id} course={course}></CourseViewCard>
+            <CourseViewCard key={course.id} course={course} getCourse={getCourse}></CourseViewCard>
         ))
     }
     async function getCourse() {
-        await axios.get(route('course.index'))
+        await axios.get(route('course.coursesToRegister'))
             .then((data) => {
                 setCourses(data.data);
                 console.log(data.data)

@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::all();
+        $courses = Course::where('creator_id',$request->user()->id)->get();
+
+        // $courses = Course::all();
         foreach ($courses as $course) {
 
             try {
@@ -22,6 +24,7 @@ class CourseController extends Controller
         }
         return $courses;
     }
+
     public function create()
     {
         return Inertia::render('Course/Main');
@@ -85,11 +88,43 @@ class CourseController extends Controller
         }
     }
 
-    public function getMyCourses(Request $request){
+    public function coursesToRegister(Request $request)
+    {
+        $userCourses = $request->user()->courses;
+        $courses = Course::whereNotIn('id', $userCourses->pluck('id'))->get();
+        return $courses;
+
+    }
+
+    public function myCourses(Request $request)
+    {
+        // return $request->user()->courses;
+        return Inertia::render('StudentCourse/MyCourses');
+
+    }
+    public function getMyCourses(Request $request)
+    {
 
         // return $request->user()->courses;
-        return Inertia::render('StudentCourse/MyCourses', ['courses' => $request->user()->courses]);
+        return  $request->user()->courses;
 
 
     }
+    public function unregister(Request $request)
+    {
+        $user = $request->user();
+        $courseId = $request->id;
+
+
+        // Check if the user is registered for the course
+        $isRegistered = $user->courses()->where('course_id', $courseId)->exists();
+
+        if ($isRegistered) {
+            $user->courses()->detach($courseId);
+            return "Successfully unregistered from the course.";
+        } else {
+            return "You are not registered for this course.";
+        }
+    }
+
 }

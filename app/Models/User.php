@@ -69,4 +69,15 @@ class User extends Authenticatable implements CanResetPassword
     {
         return $this->belongsToMany(Course::class);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    // Define the relationship to comments
+    public function postComments()
+    {
+        return $this->hasMany(PostComment::class);
+    }
 }

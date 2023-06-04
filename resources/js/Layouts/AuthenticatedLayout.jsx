@@ -28,8 +28,8 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('course.mycourse')} active={route().current('course.mycourse')}>
                                     My Courses
                                 </NavLink>
-                                <NavLink href={route('chirps.index')} active={route().current('chirps.index')}>
-                                    Questions
+                                <NavLink href={route('posts.index')} active={route().current('posts.index')}>
+                                    Discuss
                                 </NavLink>
                                 <NavLink href={route('teacher.dashboard')} active={route().current('teacher.dashboard')}>
                                     Teacher Dashboard
@@ -162,7 +162,7 @@ export default function Authenticated({ user, header, children }) {
                         <ResponsiveNavLink href={route('course.mycourse')} active={route().current('course.mycourse')}>
                             My Courses
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('chirps.index')} active={route().current('chirps.index')}>
+                        <ResponsiveNavLink href={route('posts.index')} active={route().current('posts.index')}>
                             Chirps
                         </ResponsiveNavLink>
 

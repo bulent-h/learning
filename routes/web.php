@@ -12,8 +12,10 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\OptionController;
-
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostCommentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,11 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('chirps', ChirpController::class)
-    ->only(['index', 'store', 'update', 'destroy'])
-    ->middleware(['auth', 'verified']);
-
-
 Route::get('/teacher-dashboard', function () {
     return Inertia::render('TeacherDashboard');
 })->middleware(['auth', 'verified'])->name('teacher.dashboard');
@@ -68,6 +65,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //Course
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/course/index', [CourseController::class, 'index'])->name('course.index');
+    Route::get('/course/coursesToRegister', [CourseController::class, 'coursesToRegister'])->name('course.coursesToRegister');
+
     Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');
     Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
     Route::post('/course/destroy', [CourseController::class, 'destroy'])->name('course.destroy');
@@ -111,7 +110,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //Student
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/course/register', [CourseController::class, 'register'])->name('course.register');
-    Route::get('/my-courses', [CourseController::class, 'getMyCourses'])->name('course.mycourse');
+    Route::post('/course/unregister', [CourseController::class, 'unregister'])->name('course.unregister');
+
+    Route::get('/my-courses', [CourseController::class, 'myCourses'])->name('course.mycourse');
+    Route::get('/get-my-courses', [CourseController::class, 'getMyCourses'])->name('course.getmycourse');
+
     Route::get('/course/view/{course_id}', [CourseController::class, 'show'])->name('course.show');
     Route::get('/lesson/view/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
     Route::get('/exam/view/{exam_id}', [ExamController::class, 'show'])->name('exam.show');
@@ -128,26 +131,36 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
+//post
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    Route::post('/posts', [PostController::class, 'store'])->name('post.store');
+
+    Route::get('/post/{post_id}', [PostController::class, 'show'])->name('post.show');
+
+    Route::get('/post/{post_id}/comments', [PostCommentController::class, 'index'])->name('postcomments.index');
+    Route::post('/post-comments', [PostCommentController::class, 'store'])->name('postcomments.store');
+    Route::post('/post-comments/{comment}/reply', [PostCommentController::class, 'storeReply'])->name('comments.storeReply');
+
+});
+
+// Comment routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+});
 
 
-// ++++++++++++++=======================chat
+
+//Chat
 Route::get('/chat', [ChatController::class, 'index'])->middleware(['auth', 'verified'])->name('chat');
-
 Route::get('/getUsers', [ChatController::class, 'getUsers'])->name('chat.getUsers');
 
-// __________________________________________________
-
-// Route::get('/chats', [ChatController::class, 'get'])->name('chat.get');
-
-//Api
 Route::get('/chat/messages/{id}', [ChatController::class, 'getMessages'])->name('chat.getMessages');
-
 Route::get('/chat/user/lastMessage/{id}', [ChatController::class, 'getLastMessage'])->name('chat.getLastMessage');
 Route::post('/chat/message/send', [MessageController::class, 'store'])->name('chat.sendMessage');
 
 // Route::post('/chat/message/delete',[MessageController::class, 'delete'])->name('chat.deleteMessage');
 
-// ++++++++++++++++++=======================end_chat
 
 
 require __DIR__ . '/auth.php';
