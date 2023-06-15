@@ -17,8 +17,8 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            'sender_user_id'=> rand(1,11),
-            'receiver_user_id'=> rand(1,11),
+            'sender_id'=> rand(1,11),
+            'receiver_id'=> rand(1,11),
             'text_content'=> fake()->text(),
         ];
     }

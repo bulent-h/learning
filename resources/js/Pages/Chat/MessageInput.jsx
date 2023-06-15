@@ -4,13 +4,14 @@ import { ChatContext } from '@/Pages/Chat/ChatContext';
 
 export default function MessageInput() {
 
-    const { auth, currentUserChat, fetchMessages, addToMessageContainer } = useContext(ChatContext);
+    const { auth, currentUserChat, fetchMessages, addToMessageContainer, replyMessage, setReplyMessage } = useContext(ChatContext);
     const [message, setMessage] = useState({
         text: '',
         file: '',
         fileUrl: '',
         receiver_id: currentUserChat?.id,
-        sender_id: auth?.auth.user.id
+        sender_id: auth?.auth.user.id,
+        parent_id:''
     });
 
     // var validationErrors;
@@ -22,10 +23,18 @@ export default function MessageInput() {
 
     useEffect(() => {
         handleReceiverChange();
-        // console.log(currentUserChat);
 
 
     }, [currentUserChat])
+
+    useEffect(() => {
+        setMessage({
+            ...message,
+            parent_id: replyMessage?.id
+        });
+        // console.log(message?.parent_id)
+
+    }, [replyMessage])
 
     function handleTextChange(e) {
         setMessage({
@@ -66,8 +75,10 @@ export default function MessageInput() {
             ...message,
             text: '',
             file: '',
+            parent_id: '',
             fileUrl: ''
         })
+        setReplyMessage(null);
         document.getElementById("file").value = null;
 
     }
@@ -77,6 +88,7 @@ export default function MessageInput() {
         }
     }
     function send() {
+
         axios.post(route('chat.sendMessage'), message, {
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -84,9 +96,9 @@ export default function MessageInput() {
         })
             .then(response => {
                 if (response.status >= 200 && 299 >= response.status) {
-                    // fetchMessages(currentUserChat);
+                    fetchMessages(currentUserChat);
                     // console.log(response.data);
-                    addToMessageContainer(response.data);
+                    // addToMessageContainer(response.data);
                     clearInput();
 
                 }
@@ -103,6 +115,7 @@ export default function MessageInput() {
     return (
         <>
             <div className="relative">
+
 
                 {/* <!--Image Preview --> */}
                 {

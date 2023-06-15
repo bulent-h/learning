@@ -90,6 +90,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/course/update-exam/{exam_id}', [ExamController::class, 'update'])->name('exam.update');
     Route::get('/course/edit/{course_id}/create-exam/{exam_id}', [ExamController::class, 'edit'])->name('exam.edit');
     Route::post('/course/delete-exam', [ExamController::class, 'destroy'])->name('exam.destroy');
+    Route::get('/exam/result/{exam_id}', [ExamController::class, 'getExamAnswers'])->name('exam.result');
+
 });
 //Question
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -158,6 +160,7 @@ Route::get('/getUsers', [ChatController::class, 'getUsers'])->name('chat.getUser
 Route::get('/chat/messages/{id}', [ChatController::class, 'getMessages'])->name('chat.getMessages');
 Route::get('/chat/user/lastMessage/{id}', [ChatController::class, 'getLastMessage'])->name('chat.getLastMessage');
 Route::post('/chat/message/send', [MessageController::class, 'store'])->name('chat.sendMessage');
+Route::post('/message/delete/{message}', [MessageController::class, 'destroy'])->name('message.delete');
 
 // Route::post('/chat/message/delete',[MessageController::class, 'delete'])->name('chat.deleteMessage');
 

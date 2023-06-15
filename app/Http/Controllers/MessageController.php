@@ -11,7 +11,7 @@ use App\Events\NewMessage;
 
 class MessageController extends Controller
 {
-    public function index(): Response
+    public function index()
     {
         // $user = User::find($request->user()->id);
         // $messages = $user->bothMessage($user->id,$id)->get();
@@ -21,7 +21,7 @@ class MessageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -30,7 +30,6 @@ class MessageController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    // : RedirectResponse
     {
 
         $request->validate([
@@ -40,38 +39,50 @@ class MessageController extends Controller
 
 
         $message = new Message;
-        $message->sender_user_id=$request->user()->id;
-        $message->receiver_user_id=(int)$request->receiver_id;
-        $message->text_content=$request->text;
+        $message->sender_id = $request->user()->id;
+        $message->receiver_id = (int) $request->receiver_id;
+        $message->text_content = $request->text;
+        $message->parent_id = $request->parent_id;
 
-        if($request->hasFile('file')){
-            $message->media_content_path = $request->file('file')->store('media','public');
+
+        if ($request->hasFile('file')) {
+
+            $message->media_content_path = $request->file('file')->store('media', 'public');
+
         }
         $message->save();
+
         broadcast(new NewMessage($message));
+
         return $message;
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Message $message): Response
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Message $message): Response
+    }
+    public function reply(Request $request, Message $message)
     {
-        //
+        // Validate the incoming request
+        $validatedData = $request->validate([
+            'text' => ['required', 'string'],
+            'file' => ['nullable', 'mimes:jpg,jpeg,png,gif', 'max:4096'],
+        ]);
+
+
+        // Save the reply message to the database
+        $reply = new Message();
+        $reply->sender_id = $request->user()->id;
+        $reply->receiver_id = (int) $request->receiver_id;
+        $reply->text_content = $validatedData['text'];
+        $reply->parent_id = $message->id;
+        $reply->save();
+
+        // Return a response indicating the success or failure of the operation
+        return response()->json(['message' => 'Reply sent successfully']);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Message $message): RedirectResponse
+    public function update(Request $request, Message $message)
     {
         //
     }
@@ -79,14 +90,15 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Message $message,Request $request): RedirectResponse
+    public function destroy(Request $request,Message $message)
     {
-        $message=Message::where('id',$request->message_id)->get();
+        // $message=Message::where('id',$request->message_id)->get();
+        // return $message;
 
+        if ($request->user()->id == $message['sender_id']) {
+            $message->delete();
+            return $message;
 
-        if($request->user()->id == $message[0]->sender_user_id){
-            $message[0]->delete();
-            return "deletion done";
         }
     }
 }

@@ -42,10 +42,17 @@ export default function ExamCard({ exam }) {
                 </div>
                 <div className="basis-5/12 text-ellipsis overflow-auto mx-5  text-sm text-gray-100 dark:text-gray-900" >
                     {exam.description}
+
                 </div>
-                <div className="basis-4/12 flex flex-rox justify-between items-center mx-5 my-3 text-gray-900 dark:text-gray-200" >
+                <div className="basis-2/12 flex flex-rox justify-center items-center mx-5 my-3 text-gray-900 dark:text-gray-200" >
+
+                    <Link href={route('exam.result', { exam_id: exam.id })} >
+                        View Student Answers
+                    </Link>
+                </div>
+                <div className="basis-2/12 flex flex-rox justify-between items-center mx-5 my-3 text-gray-900 dark:text-gray-200" >
                     <PrimaryButton className="mt-1 mr-4 text-sm truncate overflow-hidden">
-                        <Link href={route('exam.edit',{ exam_id: exam.id, course_id: exam.course_id})} >
+                        <Link href={route('exam.edit', { exam_id: exam.id, course_id: exam.course_id })} >
                             Edit
                         </Link>
                     </PrimaryButton>
@@ -54,6 +61,8 @@ export default function ExamCard({ exam }) {
                     >
                         Delete
                     </DangerButton>
+
+
                     <Modal show={confirmingUserDeletion} onClose={closeModal}>
 
                         <div className="p-6">
@@ -76,6 +85,7 @@ export default function ExamCard({ exam }) {
                     </Modal>
 
                 </div>
+
             </div>
         </>
     )

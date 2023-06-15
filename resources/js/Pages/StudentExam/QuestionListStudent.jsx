@@ -9,8 +9,7 @@ export default function QuestionListStudent({ questions ,exam_id}) {
     const [selectedOptions, setSelectedOptions] = useState({});
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
+        // e.preventDefault();
         try {
             const response = await axios.post(
                 route('exam.submit', { exam_id: exam_id }),
@@ -20,8 +19,6 @@ export default function QuestionListStudent({ questions ,exam_id}) {
         } catch (error) {
             console.error(error);
         }
-
-        console.log("vrieo ");
     };
 
 
@@ -34,8 +31,6 @@ export default function QuestionListStudent({ questions ,exam_id}) {
 
 
     console.log(selectedOptions)
-
-
 
     // const submit = (e) => {
 
@@ -54,7 +49,7 @@ export default function QuestionListStudent({ questions ,exam_id}) {
             </header>
 
             <div className=" max-h-full mt-4 rounded-lg overflow-auto ">
-                <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+                <form className="mt-6 space-y-6">
 
                     {questions.map((question) =>
                         <QuestionItemStudent key={question.id}
@@ -65,7 +60,7 @@ export default function QuestionListStudent({ questions ,exam_id}) {
                         </QuestionItemStudent>)
                     }
 
-                    <PrimaryButton >Save</PrimaryButton>
+                    <PrimaryButton onClick={handleSubmit} >Save</PrimaryButton>
 
                 </form>
 

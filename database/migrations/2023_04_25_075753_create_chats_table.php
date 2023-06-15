@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->integer('sender_user_id');
-            $table->integer('receiver_user_id');
+            $table->unsignedBigInteger('user1_id');
+            $table->unsignedBigInteger('user2_id');
             $table->timestamps();
+
+            $table->foreign('user1_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user2_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

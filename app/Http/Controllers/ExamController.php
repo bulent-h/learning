@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use App\Models\UserResponse;
+use App\Models\User;
 
 class ExamController extends Controller
 {
@@ -80,7 +81,6 @@ class ExamController extends Controller
      */
     public function update(Request $request)
     {
-
         // return $request;
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
@@ -110,15 +110,15 @@ class ExamController extends Controller
         return response()->json(null, 204);
     }
 
-    public function submit(Request $request)
+    public function submit(Request $request): RedirectResponse
     {
         $userId = $request->user()->id;
         $answers = $request->input('answers');
-        $exam_id= $request->exam_id;
+        $exam_id = $request->exam_id;
 
         foreach ($answers as $questionId => $selectedOptionId) {
             UserResponse::updateOrCreate([
-                'exam_id'=>$exam_id,
+                'exam_id' => $exam_id,
                 'user_id' => $userId,
                 'question_id' => $questionId,
             ], [
@@ -126,7 +126,41 @@ class ExamController extends Controller
                 ]);
         }
 
-        return response()->json(['message' => 'Answers saved successfully']);
+        // return response()->json(['message' => 'Answers saved successfully']);
+        return Redirect::route('course.mycourse');
 
+    }
+    public function getExamAnswers(Request $request)
+    {
+        $examId = $request->exam_id;
+
+        // Get the exam with its questions and options
+        $exam = Exam::with('questions.options')->findOrFail($examId);
+
+        // Get all the users who submitted answers for this exam
+        $users = User::join('user_responses', 'users.id', '=', 'user_responses.user_id')
+            ->where('user_responses.exam_id', $examId)
+            ->select('users.*')
+            ->distinct()
+            ->get();
+
+        // Loop through the users and retrieve their answers
+        $usersWithAnswers = [];
+        foreach ($users as $user) {
+            $userAnswers = UserResponse::where('exam_id', $examId)
+                ->where('user_id', $user->id)
+                ->with('question', 'option')
+                ->get();
+
+            $usersWithAnswers[] = [
+                'user' => $user,
+                'answers' => $userAnswers,
+            ];
+        }
+
+        return Inertia::render('Exam/ExamAnswers/Main', [
+            'exam' => $exam,
+            'usersWithAnswers' => $usersWithAnswers,
+        ]);
     }
 }
