@@ -60,7 +60,7 @@ export default function EditCategory( ) {
 
             </header>
 
-            <div className="max-h-full border-2 mt-8 rounded-lg bg-gray-200 dark:bg-gray-800 overflow-auto ">
+            <div className="max-h-full border-2 mt-8 rounded-2xl bg-gray-200 dark:bg-gray-800 overflow-auto ">
 
                 {list}
 

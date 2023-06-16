@@ -73,7 +73,7 @@ export default function CategoryItem({ option, handleDelete, getSingleOption }) 
                                     defaultValue={option.option_text}
                                     onChange={(e) => setOptionTmp(e.target.value)}
                                     required
-                                    className="col-span-10 mt-1 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write a question here...">
+                                    className="col-span-10 mt-1 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write a question here...">
                                 </textarea>
 
                                 <div className='col-span-2 '>

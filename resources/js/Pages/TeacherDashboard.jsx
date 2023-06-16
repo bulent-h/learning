@@ -41,7 +41,7 @@ export default function Home({ auth }) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div>
-                        <div className=" p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg " >
+                        <div className=" p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl " >
                             <div className='mb-6 text-black dark:text-white text-xl' >Create a Course / Category</div>
                             <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-2 ' >
                                 <div className='flex flex-col  shrink-0 place-items-center w-48 rounded-3xl m-2 '
@@ -72,7 +72,7 @@ export default function Home({ auth }) {
                         </div>
                     </div>
 
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <div className='mb-6 text-black dark:text-white text-xl' > My Classes</div>
 
                         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2 ' >

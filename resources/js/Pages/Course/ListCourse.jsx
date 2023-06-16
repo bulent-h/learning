@@ -31,7 +31,7 @@ export default function ManageCourse({getCourse ,allCourse}) {
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">All Courses</h2>
             </header>
 
-            <div className="max-h-full border-2 border-gray-300 dark:border-gray-600 mt-8 rounded-lg bg-gray-200 dark:bg-gray-800 overflow-auto ">
+            <div className="max-h-full border-2 border-gray-300 dark:border-gray-600 mt-8 rounded-2xl bg-gray-200 dark:bg-gray-800 overflow-auto ">
                 {list}
             </div>
 

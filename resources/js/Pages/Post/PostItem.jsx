@@ -11,7 +11,7 @@ export default function PostItem({ post }) {
 
     return (
         <>
-            <div className=' border border-gray-300  dark:border-gray-700 rounded-lg mb-2'>
+            <div className=' border border-gray-300  dark:border-gray-700 rounded-2xl mb-2'>
                 <div className="w-full m-4 text-gray-700 dark:text-gray-300  ">
                     <div className='flex '>
                         <div

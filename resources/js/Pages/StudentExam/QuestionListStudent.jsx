@@ -9,7 +9,7 @@ export default function QuestionListStudent({ questions ,exam_id}) {
     const [selectedOptions, setSelectedOptions] = useState({});
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         try {
             const response = await axios.post(
                 route('exam.submit', { exam_id: exam_id }),
@@ -48,8 +48,8 @@ export default function QuestionListStudent({ questions ,exam_id}) {
                 </h2>
             </header>
 
-            <div className=" max-h-full mt-4 rounded-lg overflow-auto ">
-                <form className="mt-6 space-y-6">
+            <div className=" max-h-full mt-4 rounded-2xl overflow-auto ">
+                <form className="mt-6 space-y-6 px-3">
 
                     {questions.map((question) =>
                         <QuestionItemStudent key={question.id}

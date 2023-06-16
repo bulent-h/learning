@@ -92,14 +92,14 @@ export default function CreatePost({ mustVerifyEmail, status, className = '' }) 
                             value={data.content}
                             onChange={(e) => setData('content', e.target.value)}
                             required
-                            className=" mt-1 block w-full block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here...">
+                            className=" mt-1 block w-full block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here...">
                         </textarea>
 
                         <InputError className="mt-2" message={errors.content} />
                     </div>
                     <div className='mt-2'>
                         <InputLabel htmlFor="file" value="Upload"
-                            className='mt-2 inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'
+                            className='mt-2 inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-2xl font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'
                         />
                         <input id="file" type="file" className="sr-only"
                             onChange={handleFileChange} />
@@ -125,7 +125,7 @@ export default function CreatePost({ mustVerifyEmail, status, className = '' }) 
                             (fileUrl)
                             &&
                             <div className='flex items-center'>
-                                <div className=" p-4 m-2 bg-center bg-cover bg-no-repeat bg-gray-200  dark:bg-gray-400  bg-origin-padding  border-4 border-dashed w-32 h-32 rounded-lg" style={{ backgroundImage: 'url(' + fileUrl + ')' }}>
+                                <div className=" p-4 m-2 bg-center bg-cover bg-no-repeat bg-gray-200  dark:bg-gray-400  bg-origin-padding  border-4 border-dashed w-32 h-32 rounded-2xl" style={{ backgroundImage: 'url(' + fileUrl + ')' }}>
                                 </div>
                                 <div className='w-32 h-32' >
                                     <button id="removeBtn" type='button' onClick={handleRemoveFile} className=" text-red-500 dark:text-red-500 text-sm hover:bg-gray-400 rounded-xl " >X</button>

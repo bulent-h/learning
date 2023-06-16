@@ -28,7 +28,7 @@ export default function CommentForm({ onCommentSubmit, isReply = false, user, le
 
     return (
         <>
-            <div className="bg-grey-100 px-4 py-4 flex items-center rounded-lg m-5 ">
+            <div className="bg-grey-100 px-4 py-4 flex items-center rounded-2xl m-5 ">
 
                 <div className='flex-1'>
                     <textarea
@@ -39,7 +39,7 @@ export default function CommentForm({ onCommentSubmit, isReply = false, user, le
                             text_content: e.target.value,
                         })}
                         required
-                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here...">
+                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here...">
                     </textarea>
                 </div>
 

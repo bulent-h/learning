@@ -22,7 +22,7 @@ export default function ViewCourse({ auth, lesson }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <section className="max-w-full">
                             <div className='mb-6 text-black dark:text-white text-3xl font-bold'>{lesson?.lesson_title}</div>
                             <div className='flex flex-col'>

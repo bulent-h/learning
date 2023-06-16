@@ -14,10 +14,11 @@ export default forwardRef(function TextInput({ type = 'text', className = '', is
             {...props}
             type={type}
             className={
-                'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-2xl shadow-sm ' +
+                'px-7 bg-opacity-60  appearance-none overflow-hidden text-center rounded-full bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-none focus:border-none focus:border-gray-300 focus:ring-gray-300 focus:dark:ring-gray-700 shadow-sm hover:bg-white' +
                 className
             }
             ref={input}
         />
+
     );
 });

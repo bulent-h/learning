@@ -15,4 +15,8 @@ class Option extends Model
     {
         return $this->belongsTo(Question::class);
     }
+    public function exam()
+    {
+        return $this->belongsTo(Exam::class);
+    }
 }

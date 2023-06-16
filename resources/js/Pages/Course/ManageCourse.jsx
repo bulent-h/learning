@@ -21,18 +21,18 @@ export default function ManageCourse({ auth, course, lessons ,exams}) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     {/*
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <section className="max-w-full">
                             <header>
                                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">All Courses</h2>
                             </header>
-                            <div className="max-h-full border-2 border-gray-300 dark:border-gray-600 mt-8 rounded-lg bg-gray-200 dark:bg-gray-800 overflow-auto ">
+                            <div className="max-h-full border-2 border-gray-300 dark:border-gray-600 mt-8 rounded-2xl bg-gray-200 dark:bg-gray-800 overflow-auto ">
                                 {course.course_title}
                             </div>
                         </section>
                     </div> */}
 
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <section className="max-w-full ">
                             {/* <header>
                                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100"></h2>
@@ -65,10 +65,10 @@ export default function ManageCourse({ auth, course, lessons ,exams}) {
 
                         </section>
                     </div>
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <LessonList lessons={lessons}></LessonList>
                     </div>
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <ExamList exams={exams}></ExamList>
                     </div>
 

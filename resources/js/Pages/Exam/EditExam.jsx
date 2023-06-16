@@ -111,7 +111,7 @@ export default function CreateExam({ CurrentExam, course, auth }) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     {/* <button onClick={() => getSingleQuestion(49)} > vklejkl</button> */}
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
 
                         <section className="max-w-xl">
                             <header>
@@ -173,14 +173,14 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                     </div>
 
 
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
 
                         <section className="max-full">
                             <header>
                                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Exam for {course.course_title}</h2>
                             </header>
                             {/* <InputLabel htmlFor="currenQuestion" value="Write Question" /> */}
-                            <div className="bg-grey-100 py-4 flex items-center rounded-lg">
+                            <div className="bg-grey-100 py-4 flex items-center rounded-2xl">
 
                                 <textarea
                                     id="currenQuestion"
@@ -188,7 +188,7 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                     value={currenQuestion}
                                     onChange={e => setCurrenQuestion(e.target.value)}
                                     required
-                                    className="mt-1 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write a question here...">
+                                    className="mt-1 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write a question here...">
                                 </textarea>
 
                                 <button onClick={handleCreateQuestion}>
@@ -207,7 +207,7 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                             </div>
 
 
-                            <div className="max-h-full  mt-8 rounded-lg bg-white dark:bg-gray-800 overflow-auto ">
+                            <div className="max-h-full  mt-8 rounded-2xl bg-white dark:bg-gray-800 overflow-auto ">
 
                                 <QuestionList CurrentExam={CurrentExam}
                                     questions={questions}

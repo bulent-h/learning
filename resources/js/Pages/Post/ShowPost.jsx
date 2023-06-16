@@ -19,12 +19,12 @@ export default function Show({ post, auth }) {
 
                 <div className="py-12">
                     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                        <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                             <section >
                                 <header className='mb-4'>
                                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{post.title}</h2>
                                 </header>
-                                <div className='  border-gray-300  dark:border-gray-700 rounded-lg mb-2'>
+                                <div className='  border-gray-300  dark:border-gray-700 rounded-2xl mb-2'>
                                     <div className="w-full m-4 text-gray-700 dark:text-gray-300  ">
                                         {/* <div className="text-lg font-medium text-gray-900 dark:text-gray-100">
                                         </div> */}

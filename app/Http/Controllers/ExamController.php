@@ -110,7 +110,7 @@ class ExamController extends Controller
         return response()->json(null, 204);
     }
 
-    public function submit(Request $request): RedirectResponse
+    public function submit(Request $request)
     {
         $userId = $request->user()->id;
         $answers = $request->input('answers');

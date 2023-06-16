@@ -32,7 +32,7 @@ export default function OptionListStudent({ options, question,handleOptionSelect
         <section className="max-full">
 
 
-            <div className="border border-gray-300 dark:border-gray-700 max-h-full mt-2  rounded-lg bg-gray-500 dark:bg-gray-800  overflow-auto ">
+            <div className="border border-gray-300 dark:border-gray-700 max-h-full mt-2  rounded-2xl bg-gray-500 dark:bg-gray-800  overflow-auto ">
 
                 {list}
 

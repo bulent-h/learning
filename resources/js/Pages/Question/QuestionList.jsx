@@ -48,7 +48,7 @@ export default function QuestionList({ exam, questions, getQuestions, getSingleQ
                 </h2>
             </header>
 
-            <div className=" max-h-full mt-4 rounded-lg overflow-auto ">
+            <div className=" max-h-full mt-4 rounded-2xl overflow-auto ">
 
                 {list}
 

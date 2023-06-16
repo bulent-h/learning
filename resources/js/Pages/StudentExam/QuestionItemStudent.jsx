@@ -11,7 +11,7 @@ export default function QuestionItemStudent({ question,handleOptionSelect,select
 
     return (
         <>
-            <div className="flex  border border-gray-300 dark:border-gray-700 items-center  drop-shadow-xl border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-900 px-3 font-medium text-sm  m-3 rounded-lg "
+            <div className="flex  border border-gray-300 dark:border-gray-700 items-center  drop-shadow-xl border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-900 px-3 font-medium text-sm  m-3 rounded-2xl "
             // style={{ backgroundImage: ' linear-gradient(to bottom right,#a0a3a3,#cccccc)' }}
             >
                 <div className="w-full py-4 text-gray-700 dark:text-gray-300 ">

@@ -47,7 +47,7 @@ export default function Authenticated({ user, header, children }) {
                             </svg>
                             <div>
                                 <input type="text"
-                                    className='bg-gray-200 text-center border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300  focus:ring-0  dark:focus:ring-0 rounded-md  border-none'
+                                    className='bg-gray-200 text-center border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300  focus:ring-0  dark:focus:ring-0 rounded-2xl  border-none'
                                     placeholder="Search" />
                             </div>
                         </div> */}
@@ -72,10 +72,10 @@ export default function Authenticated({ user, header, children }) {
 
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        {/* <span className="inline-flex rounded-md"> */}
+                                        {/* <span className="inline-flex rounded-2xl"> */}
                                         {/* <button
                                                 type="button"
-                                                className="inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none "
+                                                className="inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-2xl text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none "
                                             > */}
                                         {/* {user.name} */}
 
@@ -128,7 +128,7 @@ export default function Authenticated({ user, header, children }) {
                         <div className="-mr-2 flex items-center sm:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-2xl text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
                             >
                                 <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path

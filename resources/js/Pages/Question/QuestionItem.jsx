@@ -85,7 +85,7 @@ export default function QuestionItem({ question, handleDelete, getSingleQuestion
 
     return (
         <>
-            <div className="flex  border border-gray-300 dark:border-gray-700 items-center border-b drop-shadow-xl border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-900 px-3 font-medium text-sm  hover:bg-gray-200 m-3 rounded-lg "
+            <div className="flex  border border-gray-300 dark:border-gray-700 items-center border-b drop-shadow-xl border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-900 px-3 font-medium text-sm  hover:bg-gray-200 m-3 rounded-2xl "
             // style={{ backgroundImage: ' linear-gradient(to bottom right,#a0a3a3,#cccccc)' }}
 
             >
@@ -118,7 +118,7 @@ export default function QuestionItem({ question, handleDelete, getSingleQuestion
                                     defaultValue={question.question_text}
                                     onChange={(e) => setQuestionTmp(e.target.value)}
                                     required
-                                    className="col-span-10 mt-1 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write a question here...">
+                                    className="col-span-10 mt-1 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write a question here...">
                                 </textarea>
 
                                 {/* <TextInput
@@ -139,7 +139,7 @@ export default function QuestionItem({ question, handleDelete, getSingleQuestion
                                     </DangerButton>
                                     {/* <button onClick={() => setToggleEdit(!toggleEdit)}
                                         className=
-                                        'col-span-1 justify-self-center mt-1 text-sm truncate overflow-hidden inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-200 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-red-400 focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'
+                                        'col-span-1 justify-self-center mt-1 text-sm truncate overflow-hidden inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-red-500 border border-transparent rounded-2xl font-semibold text-xs text-white dark:text-gray-200 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-red-400 focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'
                                     >
                                         Cancel
                                     </button> */}
@@ -166,7 +166,7 @@ export default function QuestionItem({ question, handleDelete, getSingleQuestion
                                         value={currentOption}
                                         onChange={(e) => setCurrentOption(e.target.value)}
                                         required
-                                        className="col-span-10 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write an option here...">
+                                        className="col-span-10 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write an option here...">
                                     </textarea>
 
                                     <div className='col-span-2 '>

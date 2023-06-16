@@ -40,7 +40,7 @@ export default function ViewCourse({ auth, course, lessons, exams }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
 
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <section className="mb-6">
                             <div className='flex mb-4'>
                                 <div className='text-black dark:text-white text-xl ' >
