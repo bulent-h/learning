@@ -6,6 +6,7 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Redirect;
 
 class CourseController extends Controller
 {
@@ -43,6 +44,9 @@ class CourseController extends Controller
             'course_title' => $request->course_title,
             'course_description' => $request->course_description,
         ]);
+        return Redirect::route('teacher.dashboard');
+
+
     }
 
     public function show(Request $request)
@@ -62,13 +66,12 @@ class CourseController extends Controller
         return Inertia::render('Course/ManageCourse', ['course' => $course, 'lessons' => $course->lessons, 'exams' => $course->exams]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request ,Course $course)
     {
-        $course = Course::find($request->id);
 
         $course->delete();
+        return Redirect::route('teacher.dashboard');
 
-        return $course;
     }
 
     public function register(Request $request)

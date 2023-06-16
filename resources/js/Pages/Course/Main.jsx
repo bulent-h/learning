@@ -23,7 +23,7 @@ export default function Main({ auth }) {
     async function getCourse() {
         await axios.get(route('course.index'))
             .then((data) => {
-                setAllCourse(data.data);
+                setAllCourse(data.data.reverse());
             }).catch(err => {
                 console.error(err);
             })

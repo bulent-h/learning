@@ -15,7 +15,7 @@ use App\Http\Controllers\OptionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCommentController;
-
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::middleware('auth:sanctum')->get('/me', function (Request $request) {
+    return $request->user();
+})->name('me');
 
 Route::get('/teacher-dashboard', function () {
     return Inertia::render('TeacherDashboard');
@@ -69,7 +72,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');
     Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
-    Route::post('/course/destroy', [CourseController::class, 'destroy'])->name('course.destroy');
+    Route::post('/course/destroy/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
     Route::post('/course/update', [CourseController::class, 'update'])->name('course.update');
     Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
     // Route::get('/course/{id}', [CourseController::class, 'view'])->name('course.view');
@@ -154,15 +157,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 //Chat
+
+
 Route::get('/chat', [ChatController::class, 'index'])->middleware(['auth', 'verified'])->name('chat');
 Route::get('/getUsers', [ChatController::class, 'getUsers'])->name('chat.getUsers');
-
 Route::get('/chat/messages/{id}', [ChatController::class, 'getMessages'])->name('chat.getMessages');
 Route::get('/chat/user/lastMessage/{id}', [ChatController::class, 'getLastMessage'])->name('chat.getLastMessage');
 Route::post('/chat/message/send', [MessageController::class, 'store'])->name('chat.sendMessage');
 Route::post('/message/delete/{message}', [MessageController::class, 'destroy'])->name('message.delete');
-
-// Route::post('/chat/message/delete',[MessageController::class, 'delete'])->name('chat.deleteMessage');
 
 
 

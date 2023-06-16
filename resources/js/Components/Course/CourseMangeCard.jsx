@@ -27,14 +27,15 @@ export default function CourseMangeCard({ course }) {
                     {course.course_description}
                 </div>
                 <div className="basis-2/12 flex flex-rox justify-between items-center mx-5 my-3 text-gray-900 dark:text-gray-200" >
-                    <PrimaryButton onClick={handleEdit} className='mx-1'>
+                    {/* <PrimaryButton onClick={handleEdit} className='mx-1'>
                         Edit
-                    </PrimaryButton>
-                    <PrimaryButton  className='mx-1'>
-                        <Link href={route('course.edit', { id: course.id })} >
+                    </PrimaryButton> */}
+                    <Link href={route('course.edit', { id: course.id })} >
+
+                        <PrimaryButton className='mx-1'>
                             Manage
-                        </Link>
-                    </PrimaryButton>
+                        </PrimaryButton>
+                    </Link>
 
                 </div>
             </div>

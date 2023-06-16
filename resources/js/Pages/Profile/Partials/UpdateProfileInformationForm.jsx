@@ -59,7 +59,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
             setData({
                 name: userData.name,
-                username: userData.username,
                 email: userData.email,
                 avatar: userData.avatar,
                 file: null,
@@ -142,23 +141,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         <InputError className="mt-2" message={errors.name} />
                     </div>
 
-                    <div className='my-4 col-span-12 grid grid-cols-12 gap-4'>
 
-                        <div className='col-start-2 col-span-2 flex items-center justify-start '>
-                            <InputLabel className="font-semibold" htmlFor="username" value="Username" />
-                        </div>
-                        <TextInputRounded
-                            id="username"
-                            className="mt-1 block w-full col-span-7 col-start-5"
-                            value={data.username}
-                            onChange={(e) => setData('username', e.target.value)}
-                            required
-                            isFocused
-                            autoComplete="username"
-                        />
-
-                        <InputError className="mt-2" message={errors.name} />
-                    </div>
 
                     <div className='my-4 col-span-12 grid grid-cols-12 gap-4'>
                         <div className='col-start-2 col-span-2 flex items-center justify-start '>
