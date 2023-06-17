@@ -4,7 +4,6 @@ import CreatePost from '@/Pages/Post/CreatePost';
 import PostList from '@/Pages/Post/PostList';
 
 export default function IndexPosts({ auth, posts }) {
-    console.log(posts)
     return (
         <AuthenticatedLayout
             user={auth.user}

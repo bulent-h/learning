@@ -16,7 +16,6 @@ export default function ExamCard({ exam }) {
     const closeModal = () => {
         setConfirmingUserDeletion(false);
     };
-    console.log(exam)
     function handleDelete() {
         axios.post(route('exam.destroy'), { exam_id: exam.id })
             .then(response => {

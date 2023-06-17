@@ -13,7 +13,6 @@ export default function ViewExam({ auth, exam }) {
 
     useEffect(() => {
         if (exam) {
-            console.log(exam)
         }
     }, [exam])
     return (

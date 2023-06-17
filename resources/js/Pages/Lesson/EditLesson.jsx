@@ -58,7 +58,7 @@ export default function EditLesson({ lesson, auth }) {
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
 
-                        <section className="max-w-xl">
+                        <section className="max-w-2xl">
                             <header>
                                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Edit Lesson</h2>
 

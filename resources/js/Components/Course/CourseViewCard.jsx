@@ -3,8 +3,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 export default function CourseMangeCard({ course ,getCourse}) {
 
     function handleRegister() {
-        console.log(course.id);
-        axios.post(route('course.register'), { id: course.id })
+         axios.post(route('course.register'), { id: course.id })
             .then(response => {
                 if (response.status >= 200 && 299 >= response.status) {
                     console.log('registered')

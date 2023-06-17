@@ -38,8 +38,8 @@ export default function CategoryItem({ option, handleDelete, getSingleOption }) 
 
     return (
         <>
-            <div className={`flex items-center border-b border-gray-300  dark:border-gray-700  bg-white dark:bg-gray-800 px-3 font-medium text-sm d hover:bg-gray-100
-            ${option.is_correct && 'bg-green-100 hover:bg-green-200  dark:bg-green-900'}`}
+            <div className={`flex items-center border-b border-gray-300  dark:border-gray-700   px-3 font-medium text-sm d hover:bg-gray-100
+            ${option.is_correct ? 'bg-green-50 hover:bg-green-100  dark:bg-green-900' :'bg-white dark:bg-gray-800'}`}
 
             >
                 <div className="w-full py-4 text-gray-700 dark:text-gray-300 ">

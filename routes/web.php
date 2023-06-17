@@ -75,6 +75,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/course/destroy/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
     Route::post('/course/update', [CourseController::class, 'update'])->name('course.update');
     Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
+    Route::get('/course/manage/{id}', [CourseController::class, 'manage'])->name('course.manage');
+
     // Route::get('/course/{id}', [CourseController::class, 'view'])->name('course.view');
 });
 //Lesson

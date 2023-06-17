@@ -13,14 +13,14 @@ export default function Authenticated({ user, header, children }) {
             <nav className="   border-gray-100 dark:border-gray-700">
                 <div className="max-w-7xl  rounded-b-lg  mx-auto px-4 sm:px-6 lg:px-8 ">
                     <div>
-                        <div className="flex justify-between h-16 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-b-2xl">
+                        <div className="flex  h-16 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-b-2xl">
 
                             <div className="shrink-0 flex items-center">
 
                                 <DarkModeButton />
                             </div>
 
-                            <div className="flex place-self-center">
+                            <div className="flex place-self-center items-center mx-auto">
 
 
                                 <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

@@ -10,8 +10,7 @@ export default function Comments({ postId }) {
 
         axios.get(route('postcomments.index', { post_id: postId }))
             .then((data) => {
-                console.log(data.data)
-                setComments(data.data);
+                                 setComments(data.data);
 
             }).catch(err => {
                 console.error(err);

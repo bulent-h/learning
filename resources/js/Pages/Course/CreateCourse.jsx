@@ -16,7 +16,10 @@ export default function CreateCourse({ getCourse }) {
     const [options, setOptions] = useState();
     function mapOptions() {
         setOptions(allCategory.map((category) =>
-            <option value={category.id} key={category.id}>{category.category_name}</option>
+            <option key={category.id}
+                selected={category.id === form.category_id}
+                value={category.id}
+            >{category.category_name}</option>
         ))
     }
 
@@ -41,7 +44,7 @@ export default function CreateCourse({ getCourse }) {
                 if (response.status >= 200 && 299 >= response.status) {
                     getCourse()
                     setForm({
-                        category_id: null,
+                        category_id: '',
                         course_title: '',
                         course_description: ''
                     })
@@ -70,43 +73,13 @@ export default function CreateCourse({ getCourse }) {
 
 
     return (
-        <section className="max-w-xl">
+        <section className="max-w-2xl">
             <header>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                     Create Course
                 </h2>
-
-                {/* <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                </p> */}
             </header>
 
-            {/* <InputSelector>
-            <InputSelector.Trigger>
-                <select
-                    className=
-                    'border-gray-300 mt-1 block w-full dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-2xl shadow-sm '
-                >
-                </select>
-            </InputSelector.Trigger>
-            <InputSelector.Content align='left' >
-                <InputSelector.Link >Profile1</InputSelector.Link>
-                <InputSelector.Link >Profile2</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-                <InputSelector.Link >Profile3</InputSelector.Link>
-
-            </InputSelector.Content>
-        </InputSelector> */}
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>

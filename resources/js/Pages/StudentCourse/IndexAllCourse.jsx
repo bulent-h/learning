@@ -18,8 +18,7 @@ export default function Home({ auth }) {
         await axios.get(route('course.coursesToRegister'))
             .then((data) => {
                 setCourses(data.data);
-                console.log(data.data)
-            }).catch(err => {
+                             }).catch(err => {
                 console.error(err);
             })
     }

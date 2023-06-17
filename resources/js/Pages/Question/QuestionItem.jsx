@@ -172,9 +172,9 @@ export default function QuestionItem({ question, handleDelete, getSingleQuestion
                                     <div className='col-span-2 '>
 
                                         <button onClick={handleCreateOption}>
-                                            <div className='flex flex-col hover:scale-105 shrink-0 place-items-center px-3 w-full rounded-3xl  '
+                                            <div className='flex flex-col bg-gradient-to-br from-purple-600 to-cyan-200 dark:from-indigo-800 dark:to-teal-900 hover:scale-105 shrink-0 place-items-center px-3 w-full rounded-3xl  '
 
-                                                style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
+                                                // style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
                                             >
                                                 <div className='flex flex-col h-full '>
                                                     <div className='flex justify-center my-2 text-gray-900 dark:text-white'>

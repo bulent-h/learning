@@ -8,6 +8,7 @@ import { Head } from '@inertiajs/react';
 import QuestionList from '@/Pages/Question/QuestionList'
 import { Transition } from '@headlessui/react';
 import InputError from '@/Components/InputError';
+import ColorfulButton from '@/Components/ColorfulButton';
 
 export default function CreateExam({ CurrentExam, course, auth }) {
 
@@ -49,11 +50,11 @@ export default function CreateExam({ CurrentExam, course, auth }) {
             [e.target.name]: e.target.value
         });
     }
-    function handleCheckbox(){
-        if(data.is_open === 0){
+    function handleCheckbox() {
+        if (data.is_open === 0) {
             setData('is_open', 1)
         }
-        else{
+        else {
             setData('is_open', 0)
         }
     }
@@ -86,7 +87,6 @@ export default function CreateExam({ CurrentExam, course, auth }) {
             .then((data) => {
                 nextArr[targetObj] = data.data;
                 // targetObj = data.data;
-                console.log(nextArr);
 
                 setQuestions(nextArr);
 
@@ -113,11 +113,11 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                     {/* <button onClick={() => getSingleQuestion(49)} > vklejkl</button> */}
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
 
-                        <section className="max-w-xl">
+                        <section className="max-w-2xl">
                             <header>
                                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Exam for {course.course_title}</h2>
                             </header>
-                            <form onSubmit={submit} className="mt-6 space-y-6">
+                            <form onSubmit={submit} className="mt-6 space-y-6 ml-4">
                                 <div>
                                     <InputLabel htmlFor="title" value="Exam Title" />
 
@@ -146,15 +146,15 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                     />
                                 </div>
 
-                                <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-4 ">
                                     <TextInput
-                                    // className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        // className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                         id="is_open" type="checkbox" value=""
                                         name="is_open"
                                         checked={data.is_open === 1}
                                         onChange={handleCheckbox}
                                     />
-                                    <InputLabel htmlFor="is_open" value="Is open" />
+                                    <InputLabel htmlFor="is_open" value="Publish the Exam" />
                                 </div>
 
                                 <div className="flex items-center gap-4">
@@ -192,12 +192,13 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                 </textarea>
 
                                 <button onClick={handleCreateQuestion}>
-                                    <div className='flex flex-col  shrink-0 place-items-center px-3 w-full rounded-3xl m-2 '
+                                    <div
+                                        className='flex flex-col  bg-gradient-to-br from-purple-600 to-cyan-200 dark:from-indigo-800 dark:to-teal-900  shrink-0 place-items-center px-3 w-full rounded-3xl m-2 '
 
-                                        style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
+                                    // style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
                                     >
                                         <div className='flex flex-col h-full '>
-                                            <div className='flex justify-center my-4 text-gray-900 dark:text-white'>
+                                            <div className='flex justify-center my-2 text-gray-900 dark:text-white'>
                                                 <p>Add Question</p>
                                             </div>
                                         </div>

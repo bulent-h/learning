@@ -63,6 +63,11 @@ class CourseController extends Controller
     public function edit(Request $request)
     {
         $course = Course::find($request->id);
+        return Inertia::render('Course/EditCourse', ['course' => $course, 'lessons' => $course->lessons, 'exams' => $course->exams]);
+    }
+    public function manage(Request $request)
+    {
+        $course = Course::find($request->id);
         return Inertia::render('Course/ManageCourse', ['course' => $course, 'lessons' => $course->lessons, 'exams' => $course->exams]);
     }
 

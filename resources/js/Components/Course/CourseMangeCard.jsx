@@ -4,8 +4,7 @@ import { Link } from '@inertiajs/react';
 export default function CourseMangeCard({ course }) {
 
     function handleEdit() {
-        console.log(course.id);
-    }
+     }
 
     function handleManage() {
 
@@ -30,7 +29,7 @@ export default function CourseMangeCard({ course }) {
                     {/* <PrimaryButton onClick={handleEdit} className='mx-1'>
                         Edit
                     </PrimaryButton> */}
-                    <Link href={route('course.edit', { id: course.id })} >
+                    <Link href={route('course.manage', { id: course.id })} >
 
                         <PrimaryButton className='mx-1'>
                             Manage

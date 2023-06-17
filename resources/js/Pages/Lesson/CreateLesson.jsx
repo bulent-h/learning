@@ -8,7 +8,7 @@ import { Transition } from '@headlessui/react';
 import Dropdown from '@/Components/Dropdown';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-
+import { router } from '@inertiajs/react';
 export default function CreateLesson({ course, auth }) {
 
     const [form, setForm] = useState({
@@ -22,23 +22,23 @@ export default function CreateLesson({ course, auth }) {
         e.preventDefault();
         console.log(form);
 
-        axios.post(route('lesson.store', { course_id: course.id }), form, {
+        router.post(route('lesson.store', { course_id: course.id }), form, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
         })
-            .then(response => {
-                if (response.status >= 200 && 299 >= response.status) {
-                    setForm({
-                        lesson_title: '',
-                        lesson_description: '',
-                        video_path: '',
-                    })
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            })
+            // .then(response => {
+            //     if (response.status >= 200 && 299 >= response.status) {
+            //         setForm({
+            //             lesson_title: '',
+            //             lesson_description: '',
+            //             video_path: '',
+            //         })
+            //     }
+            // })
+            // .catch(error => {
+            //     console.log(error);
+            // })
     }
     function handleChange(e) {
         setForm({
@@ -62,7 +62,7 @@ export default function CreateLesson({ course, auth }) {
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
 
-                        <section className="max-w-xl">
+                        <section className="max-w-2xl">
                             <header>
                                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create Lesson</h2>
 

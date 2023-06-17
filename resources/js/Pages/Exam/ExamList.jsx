@@ -11,7 +11,6 @@ export default function ExamList({ exams}) {
             <ExamCard key={exam.id} exam={exam}  ></ExamCard>
         ))
     }
-    console.log(exams)
     useEffect(() => {
         mapCourse()
     }, [])

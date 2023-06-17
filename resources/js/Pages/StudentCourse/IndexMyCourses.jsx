@@ -18,8 +18,7 @@ export default function IndexMyCourses({}) {
         await axios.get(route('course.getmycourse'))
             .then((data) => {
                 setCourses(data.data);
-                console.log(data.data)
-            }).catch(err => {
+                             }).catch(err => {
                 console.error(err);
             })
     }

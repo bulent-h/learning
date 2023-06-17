@@ -5,8 +5,7 @@ import { Link } from '@inertiajs/react';
 export default function CourseMangeCard({ getCourse,course }) {
 
     function handleUnregister() {
-        console.log(course.id);
-        axios.post(route('course.unregister'), { id: course.id })
+         axios.post(route('course.unregister'), { id: course.id })
             .then(response => {
                 if (response.status >= 200 && 299 >= response.status) {
                     console.log('unregistered')

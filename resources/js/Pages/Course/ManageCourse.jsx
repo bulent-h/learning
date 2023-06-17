@@ -50,7 +50,6 @@ export default function ManageCourse({ auth, course, lessons, exams }) {
                         </section>
                     </div> */}
 
-
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <section className="max-w-full ">
                             {/* <header>
@@ -80,15 +79,23 @@ export default function ManageCourse({ auth, course, lessons, exams }) {
                                         </a>
                                     </div>
                                 </div>
-                                <div className='flex flex-col ml-auto justify-self-end shrink-0 place-items-center  w-40 rounded-3xl m-1 '
+
+                                <div onClick={()=>router.get(route('course.edit',{ id: course.id }))} className='flex flex-col bg-gradient-to-br from-purple-600 to-cyan-200 dark:from-indigo-500 dark:to-teal-600  ml-auto justify-self-end shrink-0 place-items-center cursor-pointer  w-40 rounded-3xl m-1 '
+                                    // style={{ backgroundImage: ' linear-gradient(to bottom right,#aa4444,#ff1111)' }}
+                                >
+                                    <div className='flex flex-col h-full  '>
+                                        <div className='flex justify-center my-3'>
+                                            <p >Edit this course</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div onClick={confirmCourseDeletion} className='flex flex-col  justify-self-end shrink-0 place-items-center cursor-pointer  w-40 rounded-3xl m-1 '
                                     style={{ backgroundImage: ' linear-gradient(to bottom right,#aa4444,#ff1111)' }}
                                 >
                                     <div className='flex flex-col h-full  '>
-                                        <a onClick={confirmCourseDeletion}>
-                                            <div className='flex justify-center my-3'>
-                                                <p >Delete this course</p>
-                                            </div>
-                                        </a>
+                                        <div className='flex justify-center my-3'>
+                                            <p >Delete this course</p>
+                                        </div>
                                     </div>
                                 </div>
 

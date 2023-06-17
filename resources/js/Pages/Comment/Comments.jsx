@@ -10,8 +10,7 @@ export default function Comments({ lessonId }) {
 
         axios.get(route('comments.index', { lesson_id: lessonId }))
             .then((data) => {
-                console.log(data.data)
-                setComments(data.data);
+                                 setComments(data.data);
 
             }).catch(err => {
                 console.error(err);

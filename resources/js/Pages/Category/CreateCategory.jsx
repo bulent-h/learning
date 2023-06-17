@@ -34,7 +34,7 @@ export default function CreateCategory() {
 
     return (
 
-        <section className="max-w-xl">
+        <section className="max-w-2xl">
             <header>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Create Category</h2>
 

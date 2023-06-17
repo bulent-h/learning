@@ -6,6 +6,7 @@ use App\Models\Lesson;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 
 class LessonController extends Controller
 {
@@ -45,6 +46,7 @@ class LessonController extends Controller
             'lesson_description' => $request->lesson_description,
             'video_path' => $request->video_path,
         ]);
+        return Redirect::route('course.manage',['id'=>$request->course_id]);
     }
 
     /**
