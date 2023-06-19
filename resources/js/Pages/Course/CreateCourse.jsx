@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 export default function CreateCourse({ getCourse }) {
     const [form, setForm] = useState({
-        category_id: null,
+        category_id: '',
         course_title: '',
         course_description: ''
     });
@@ -17,13 +17,10 @@ export default function CreateCourse({ getCourse }) {
     function mapOptions() {
         setOptions(allCategory.map((category) =>
             <option key={category.id}
-                selected={category.id === form.category_id}
                 value={category.id}
             >{category.category_name}</option>
         ))
     }
-
-    // const [allCategory,setAllCategory]=useState()
 
     async function getCategory() {
         await axios.get(route('category.index'))
@@ -88,10 +85,14 @@ export default function CreateCourse({ getCourse }) {
                         required
                         id='category_id'
                         name='category_id'
+                        value={form.category_id}
                         onChange={handleChange}
                         className='mt-1 border-gray-300 block w-full dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-2xl shadow-sm '
                     >
-                        <option value=""> </option>
+                        <option
+                            // selected={category.id === form.category_id}
+
+                            value=""> </option>
                         {options}
                     </select>
                 </div>

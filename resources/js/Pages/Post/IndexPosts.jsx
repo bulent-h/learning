@@ -2,8 +2,15 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import CreatePost from '@/Pages/Post/CreatePost';
 import PostList from '@/Pages/Post/PostList';
+import MyPostList from '@/Pages/Post/MyPostList';
 
-export default function IndexPosts({ auth, posts }) {
+import { useState } from 'react';
+import DangerButton from '@/Components/DangerButton';
+
+export default function IndexPosts({ auth, posts, courses }) {
+
+    // console.log(posts)
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -15,16 +22,16 @@ export default function IndexPosts({ auth, posts }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
-                        <CreatePost/>
+                        <CreatePost courses={courses} />
                     </div>
-
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
-                        <PostList posts={posts}></PostList>
-                    </div>
 
+                        <PostList auth={auth} posts={posts} courses={courses} ></PostList>
+
+                    </div>
 
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AuthenticatedLayout >
     );
 }

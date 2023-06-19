@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
     public function index(Request $request)
     {
-        $courses = Course::where('creator_id',$request->user()->id)->get();
+        $courses = Course::where('creator_id', $request->user()->id)->get();
 
         // $courses = Course::all();
         foreach ($courses as $course) {
@@ -33,10 +34,8 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_id' => 'required|numeric|max:255',
             'course_title' => 'required|string|max:255|unique:' . Course::class,
             'course_description' => 'required|string|max:2048'
-
         ]);
         $course = Course::create([
             'creator_id' => $request->user()->id,
@@ -44,6 +43,8 @@ class CourseController extends Controller
             'course_title' => $request->course_title,
             'course_description' => $request->course_description,
         ]);
+        $request->user()->courses()->attach($course->id);
+
         return Redirect::route('teacher.dashboard');
 
 
@@ -71,7 +72,7 @@ class CourseController extends Controller
         return Inertia::render('Course/ManageCourse', ['course' => $course, 'lessons' => $course->lessons, 'exams' => $course->exams]);
     }
 
-    public function destroy(Request $request ,Course $course)
+    public function destroy(Request $request, Course $course)
     {
 
         $course->delete();
@@ -114,7 +115,7 @@ class CourseController extends Controller
     {
 
         // return $request->user()->courses;
-        return  $request->user()->courses;
+        return $request->user()->courses;
 
 
     }
@@ -129,10 +130,26 @@ class CourseController extends Controller
 
         if ($isRegistered) {
             $user->courses()->detach($courseId);
-            return "Successfully unregistered from the course.";
-        } else {
-            return "You are not registered for this course.";
+            // return "Successfully unregistered from the course.";
+            return Redirect::route('course.mycourse');
+
         }
+        // else {
+        //     return "You are not registered for this course.";
+        // }
+    }
+    public function searchCourses(Request $request)
+    {
+        $query = $request->input('query');
+
+        $courses = Course::where('course_title', 'like', "%{$query}%")
+            ->whereDoesntHave('users', function ($query) use ($request) {
+                $query->where('user_id', $request->user()->id);
+            })
+            ->get();
+
+        return $courses;
+
     }
 
 }

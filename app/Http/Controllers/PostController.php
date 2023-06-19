@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -14,11 +15,38 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $posts = Post::all();
-        $posts = Post::with('user')->get();
-        return Inertia::render('Post/IndexPosts', ['posts' => $posts]);
+        // $posts = Post::with('user','course')->get();
+        // $courses = $request->user()->courses;
+        // return Inertia::render('Post/IndexPosts', ['posts' => $posts, 'courses' => $courses]);
+
+        $userCourses = $request->user()->courses()->pluck('course_id');
+
+        $myposts = Post::where('user_id', $request->user()->id)
+            ->with('user', 'course')
+            ->get();
+
+        $posts = Post::with('user', 'course')
+            ->whereIn('course_id', $userCourses)
+            ->get();
+
+        $courses = $request->user()->courses;
+
+        return Inertia::render('Post/IndexPosts', ['posts' => $posts, 'courses' => $courses, 'myposts' => $myposts]);
+    }
+
+    public function indexMyPosts(Request $request)
+    {
+        $user = $request->user();
+
+        $posts = Post::where('user_id', $user->id)
+            ->with('user', 'course')
+            ->get();
+
+        $courses = $user->courses;
+
+        return Inertia::render('Post/MyPostList', ['posts' => $posts, 'courses' => $courses]);
     }
 
     /**
@@ -45,15 +73,22 @@ class PostController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+
         $post = new Post();
         $post->user_id = $request->user()->id;
         $post->title = $request->input('title');
         $post->content = $request->input('content');
+        $post->course_id = $request->input('course_id');
 
-        // Set other post attributes as needed
+        if ($request->hasFile('file')) {
+            $post->media_url = $request->file('file')->store('post', 'public');
+        }
+
         $post->save();
 
-        return redirect()->back();
+        return Redirect::route('posts.index');
+        // return Redirect::route('profile.edit');
+
     }
 
     /**
@@ -104,7 +139,16 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
-        return redirect()->route('posts.index');
+
+        if ($post->user_id == auth()->user()->id) {
+            $post->delete();
+            // return redirect()->route('myposts.index');
+            return back();
+
+        } else {
+            abort(403, 'You are not authorized to delete this post.');
+            // return redirect()->route('posts.index');
+            return back();
+        }
     }
 }

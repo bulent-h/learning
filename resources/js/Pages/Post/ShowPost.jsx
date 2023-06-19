@@ -28,8 +28,25 @@ export default function Show({ post, auth }) {
                                     <div className="w-full m-4 text-gray-700 dark:text-gray-300  ">
                                         {/* <div className="text-lg font-medium text-gray-900 dark:text-gray-100">
                                         </div> */}
-                                        <div className="col-span-10 justify-self-start self-center mt-1 ">
+                                        {/* <div className=" justify-self-start self-center mt-1 ">
                                             {post.content}
+                                        </div> */}
+
+                                        <div className='ml-4'>
+                                            <div className="col-span-10 justify-self-start self-center mt-1 ">
+                                                {post.content}
+                                            </div>
+                                            {(post.media_url) &&
+                                                <div className="bg-gray-white mt-4  bottom-20 right-2 w-fit rounded-xl ">
+                                                    <div
+                                                        className=" w-96 h-96  rounded-2xl bg-contain  bg-no-repeat bg-center"
+                                                        style={{ backgroundImage: `url(/storage/${post.media_url})` }}
+                                                    >
+                                                    </div>
+                                                </div>
+                                            }
+
+
                                         </div>
                                     </div>
                                 </div>

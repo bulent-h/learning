@@ -21,6 +21,8 @@ export default function CreateExam({ CurrentExam, course, auth }) {
         title: CurrentExam.title,
         description: CurrentExam.description,
         is_open: CurrentExam.is_open,
+        start_time: CurrentExam.start_time,
+        end_time: CurrentExam.end_time,
     });
     // function submit(e) {
     //     e.preventDefault();
@@ -40,6 +42,8 @@ export default function CreateExam({ CurrentExam, course, auth }) {
     //             console.log(error);
     //         })
     // }
+
+
     const submit = (e) => {
         e.preventDefault();
         post(route('exam.update', { exam_id: CurrentExam.id }));
@@ -156,6 +160,31 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                                     />
                                     <InputLabel htmlFor="is_open" value="Publish the Exam" />
                                 </div>
+                                <div>
+                                    <InputLabel htmlFor="start_time" value="Start Time" />
+                                    <TextInput
+                                        required
+                                        id="start_time"
+                                        name="start_time"
+                                        value={data.start_time}
+                                        onChange={handleChange}
+                                        type="datetime-local"
+                                        className="mt-1 block w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <InputLabel htmlFor="end_time" value="End Time" />
+                                    <TextInput
+                                        required
+                                        id="end_time"
+                                        name="end_time"
+                                        value={data.end_time}
+                                        onChange={handleChange}
+                                        type="datetime-local"
+                                        className="mt-1 block w-full"
+                                    />
+                                </div>
+
 
                                 <div className="flex items-center gap-4">
                                     <PrimaryButton >Save</PrimaryButton>
@@ -212,6 +241,7 @@ export default function CreateExam({ CurrentExam, course, auth }) {
 
                                 <QuestionList CurrentExam={CurrentExam}
                                     questions={questions}
+                                    exam={CurrentExam}
                                     getQuestions={getQuestions}
                                     getSingleQuestion={getSingleQuestion}>
                                 </QuestionList>

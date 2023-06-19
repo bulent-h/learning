@@ -44,6 +44,10 @@ class Course extends Model
     {
         return $this->hasMany(Exam::class,'course_id');
     }
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class,'course_id');
+    }
 
 
 }

@@ -15,9 +15,10 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
-    // Define the relationship to comments
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
     public function postComments()
     {
         return $this->hasMany(PostComment::class);

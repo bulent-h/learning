@@ -19,8 +19,6 @@ export default function CreateCourse({ auth, course }) {
             <option
                 key={category.id}
                 value={category.id}
-                selected={category.id === form.category_id}
-
             >{category.category_name}</option>
         ))
     }
@@ -101,6 +99,7 @@ export default function CreateCourse({ auth, course }) {
                                         id='category_id'
                                         name='category_id'
                                         onChange={handleChange}
+                                        value={form.category_id}
                                         className='mt-1 border-gray-300 block w-full dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-2xl shadow-sm '
                                     >
                                         <option value=""> </option>

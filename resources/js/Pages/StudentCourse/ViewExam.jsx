@@ -38,7 +38,7 @@ export default function ViewExam({ auth, exam }) {
                             </div>
 
                             <div>
-                                <QuestionListStudent questions={exam.questions}  exam_id={exam.id} />
+                                <QuestionListStudent questions={exam.questions}  exam_id={exam.id}  exam={exam}/>
                             </div>
                         </section >
 

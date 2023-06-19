@@ -61,8 +61,6 @@ export default function QuestionItem({ question, handleDelete, getSingleQuestion
             .then((data) => {
                 nextArr[targetObj] = data.data;
                 // targetObj = data.data;
-                console.log(nextArr);
-
                 setOptions(nextArr);
 
             }).catch(err => {

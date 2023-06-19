@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('creator_id')->references('id')->on('users');;
-            $table->bigInteger('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('creator_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('course_title')->unique();
             $table->string('course_description',2048);
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

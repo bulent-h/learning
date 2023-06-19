@@ -52,9 +52,12 @@ export default function ManageCourse({ auth, course, lessons, exams }) {
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <section className="max-w-full ">
-                            {/* <header>
-                                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100"></h2>
-                            </header> */}
+                            <header>
+                                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">
+                                    {course.course_title}
+
+                                </h2>
+                            </header>
 
                             <div className='flex flex-row w-full'>
                                 <div className='flex flex-col  shrink-0 place-items-center  w-36 rounded-3xl m-1 '
@@ -80,8 +83,8 @@ export default function ManageCourse({ auth, course, lessons, exams }) {
                                     </div>
                                 </div>
 
-                                <div onClick={()=>router.get(route('course.edit',{ id: course.id }))} className='flex flex-col bg-gradient-to-br from-purple-600 to-cyan-200 dark:from-indigo-500 dark:to-teal-600  ml-auto justify-self-end shrink-0 place-items-center cursor-pointer  w-40 rounded-3xl m-1 '
-                                    // style={{ backgroundImage: ' linear-gradient(to bottom right,#aa4444,#ff1111)' }}
+                                <div onClick={() => router.get(route('course.edit', { id: course.id }))} className='flex flex-col bg-gradient-to-br from-purple-600 to-cyan-200 dark:from-indigo-500 dark:to-teal-600  ml-auto justify-self-end shrink-0 place-items-center cursor-pointer  w-40 rounded-3xl m-1 '
+                                // style={{ backgroundImage: ' linear-gradient(to bottom right,#aa4444,#ff1111)' }}
                                 >
                                     <div className='flex flex-col h-full  '>
                                         <div className='flex justify-center my-3'>
@@ -103,13 +106,13 @@ export default function ManageCourse({ auth, course, lessons, exams }) {
 
                         </section>
                     </div>
-
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
-                        <LessonList lessons={lessons}></LessonList>
-                    </div>
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
                         <ExamList exams={exams}></ExamList>
                     </div>
+                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-2xl">
+                        <LessonList lessons={lessons}></LessonList>
+                    </div>
+
 
                 </div>
             </div>
@@ -126,7 +129,7 @@ export default function ManageCourse({ auth, course, lessons, exams }) {
                         <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
 
                         <DangerButton className="ml-3" >
-                            Delete Account
+                            Delete
                         </DangerButton>
                     </div>
                 </form>

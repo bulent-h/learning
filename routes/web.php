@@ -77,6 +77,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
     Route::get('/course/manage/{id}', [CourseController::class, 'manage'])->name('course.manage');
 
+    Route::get('/search-courses', [CourseController::class, 'searchCourses'])->name('search.courses');
+
     // Route::get('/course/{id}', [CourseController::class, 'view'])->name('course.view');
 });
 //Lesson
@@ -141,10 +143,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //post
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/my-posts', [PostController::class, 'indexMyPosts'])->name('myposts.index');
+
     Route::post('/posts', [PostController::class, 'store'])->name('post.store');
+    Route::post('/posts/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 
     Route::get('/post/{post_id}', [PostController::class, 'show'])->name('post.show');
-
     Route::get('/post/{post_id}/comments', [PostCommentController::class, 'index'])->name('postcomments.index');
     Route::post('/post-comments', [PostCommentController::class, 'store'])->name('postcomments.store');
     Route::post('/post-comments/{comment}/reply', [PostCommentController::class, 'storeReply'])->name('comments.storeReply');

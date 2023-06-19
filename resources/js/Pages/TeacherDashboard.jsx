@@ -48,7 +48,7 @@ export default function Home({ auth }) {
                                     style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
                                 >
                                     <div className='flex flex-col h-full '>
-                                        <div className='flex justify-center my-4'>
+                                        <div className='flex justify-center my-3'>
                                             <a href={route('category.create')}>Create Category</a>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@ export default function Home({ auth }) {
                                     style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
                                 >
                                     <div className='flex flex-col h-full '>
-                                        <div className='flex justify-center my-4'>
+                                        <div className='flex justify-center my-3'>
                                             <a href={route('course.create')}>Create Course</a>
                                         </div>
                                         {/* <div className='flex h-full justify-center my-4 place-items-center '>

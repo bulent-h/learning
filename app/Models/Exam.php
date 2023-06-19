@@ -14,7 +14,9 @@ class Exam extends Model
         'title',
         'description',
         'is_open',
-        'duretion'
+        'duretion',
+        'start_time',
+        'end_time'
     ];
     public function questions()
     {

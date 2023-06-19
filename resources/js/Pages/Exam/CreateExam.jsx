@@ -10,13 +10,14 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
 export default function CreateExam({ course, auth }) {
-    let nextId = useRef(0);
 
 
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm({
         course_id: course.id,
         title: '',
         description: '',
+        start_time: '',
+        end_time: '',
     });
     const [currenQuestion, setCurrenQuestion] = useState('');
 

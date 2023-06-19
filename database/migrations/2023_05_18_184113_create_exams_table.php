@@ -19,6 +19,9 @@ return new class extends Migration
             $table->boolean('is_open')->default(false);
             $table->integer('duration')->nullable();
             $table->timestamps();
+
+            $table->timestamp('start_time')->nullable();
+            $table->timestamp('end_time')->nullable();
         });
     }
 
