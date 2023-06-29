@@ -9,16 +9,24 @@ class PostComment extends Model
 {
     use HasFactory;
 
-    protected $fillable=['post_id','content','user_id','media_url'];
+    protected $fillable=['post_id','text','user_id','media_url','parent_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Define the relationship to the post the comment belongs to
     public function post()
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(PostComment::class, 'parent_id');
+    }
+    public function replies()
+    {
+        return $this->hasMany(PostComment::class, 'parent_id');
     }
 }

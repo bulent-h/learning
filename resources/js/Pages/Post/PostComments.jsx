@@ -43,7 +43,23 @@ export default function Comments({ postId }) {
         //     },
         // });
     };
+    const handleDelete = (commentData) => {
 
+        axios.post(route('postcomments.destroy'), commentData)
+            .then(response => {
+                if (response.status >= 200 && 299 >= response.status) {
+                    fetchComments();
+                    // clearInput();
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        // router.post(route('comments.store'), commentData, {
+        //     onSuccess: () => {
+        //     },
+        // });
+    };
     // const handleReplySubmit = (parentId, replyData) => {
     //     router.post(route('comments.storeReply', { parentId }), replyData, {
     //         onSuccess: () => {
@@ -81,7 +97,7 @@ export default function Comments({ postId }) {
 
                                         <div>
                                             <p className=" m-2 text-sm font-bold text-gray-800 dark:text-gray-200">
-                                                {comment.content}
+                                                {comment.text}
                                             </p>
                                         </div>
                                     </div>

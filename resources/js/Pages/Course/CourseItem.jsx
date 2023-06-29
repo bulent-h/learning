@@ -3,7 +3,7 @@ import TextInput from '@/Components/TextInput';
 import Modal from '@/Components/Modal';
 import SecondaryButton from '@/Components/SecondaryButton';
 import DangerButton from '@/Components/DangerButton';
-
+import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function CourseItem({ course, getCourse }) {
@@ -82,9 +82,10 @@ export default function CourseItem({ course, getCourse }) {
                         </ReadMore>
 
                         <div className='col-span-2 '>
-                            <PrimaryButton className="mt-1 mr-4 text-sm truncate overflow-hidden">
+                            <PrimaryButton onClick={() => router.get(route('course.edit', { id: course.id }))} className="mt-1 mr-4 text-sm truncate overflow-hidden">
                                 Edit
                             </PrimaryButton>
+
                             <DangerButton
                                 onClick={confirmUserDeletion}
                             // className=
@@ -94,7 +95,7 @@ export default function CourseItem({ course, getCourse }) {
                             </DangerButton>
                             <Modal show={confirmingUserDeletion} onClose={closeModal}>
 
-                                <div  className="p-6">
+                                <div className="p-6">
                                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                                         Are you sure you want to delete this course?
                                     </h2>
@@ -106,8 +107,8 @@ export default function CourseItem({ course, getCourse }) {
                                         </SecondaryButton>
 
                                         <DangerButton
-                                        className="ml-3"
-                                        onClick={handleDelete}
+                                            className="ml-3"
+                                            onClick={handleDelete}
                                         >
                                             Delete
                                         </DangerButton>

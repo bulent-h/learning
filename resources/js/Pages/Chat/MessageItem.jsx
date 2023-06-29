@@ -171,9 +171,9 @@ export default function MessageItem({ message }) {
                                     </DropdownMenu.Trigger>
                                 </div>
                                 <DropdownMenu.Content contentClasses='py-1 mr-4' >
-                                    <DropdownMenu.Link onClick={handleDelete} className="flex justify-center px-12 text-sm text-red-600">
+                                    {/* <DropdownMenu.Link onClick={handleDelete} className="flex justify-center px-12 text-sm text-red-600">
                                         Delete
-                                    </DropdownMenu.Link>
+                                    </DropdownMenu.Link> */}
                                     <DropdownMenu.Link onClick={handelReply} className="flex justify-center px-12">
                                         Reply
                                     </DropdownMenu.Link>

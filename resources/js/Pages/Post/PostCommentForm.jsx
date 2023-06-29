@@ -6,7 +6,7 @@ export default function CommentForm({ onCommentSubmit, isReply = false, user, po
 
     const [comment, setComment] = useState({
         post_id: postId,
-        content: '',
+        text: '',
         file: '',
 
     });
@@ -20,7 +20,7 @@ export default function CommentForm({ onCommentSubmit, isReply = false, user, po
         }
         setComment({
             ...comment,
-            content: '',
+            text: '',
         })
         console.log('OKKK')
 
@@ -32,11 +32,11 @@ export default function CommentForm({ onCommentSubmit, isReply = false, user, po
 
                 <div className='flex-1'>
                     <textarea
-                        id="textContent"
-                        value={comment.content}
+                        id="texttext"
+                        value={comment.text}
                         onChange={(e) => setComment({
                             ...comment,
-                            content: e.target.value,
+                            text: e.target.value,
                         })}
                         required
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here...">

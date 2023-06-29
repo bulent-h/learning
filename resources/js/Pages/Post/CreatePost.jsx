@@ -127,7 +127,7 @@ export default function CreatePost({ courses }) {
                                     value={data.content}
                                     onChange={(e) => setData('content', e.target.value)}
                                     required
-                                    className=" mt-1 block w-full block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here...">
+                                    className=" mt-1 block w-full h-36 block p-2.5 w-full text-sm text-gray-900 bg-white rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here...">
                                 </textarea>
 
                                 <InputError className="mt-2" message={errors.content} />

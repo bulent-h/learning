@@ -117,7 +117,16 @@ export default function CreateCourse({ getCourse }) {
                 <div>
                     <InputLabel htmlFor="course_description" value="Course Description" />
 
-                    <TextInput
+
+                    <textarea
+                        id="course_description"
+                        name="course_description"
+                        value={form.course_description}
+                        onChange={handleChange}
+                        required
+                        className="mt-1 block p-3 h-48 w-full text-sm text-gray-900 bg-white rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                    </textarea>
+                    {/* <TextInput
                         required
                         id="course_description"
                         name="course_description"
@@ -126,7 +135,7 @@ export default function CreateCourse({ getCourse }) {
                         onChange={handleChange}
                         type="text"
                         className="mt-1 block w-full"
-                    />
+                    /> */}
                     {/* <InputError message={errors.current_password} className="mt-2" /> */}
                 </div>
                 <div className="flex items-center gap-4">

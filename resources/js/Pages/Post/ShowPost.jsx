@@ -37,9 +37,9 @@ export default function Show({ post, auth }) {
                                                 {post.content}
                                             </div>
                                             {(post.media_url) &&
-                                                <div className="bg-gray-white mt-4  bottom-20 right-2 w-fit rounded-xl ">
+                                                <div className="bg-gray-white mt-4  bottom-20 right-2 w-fit  ">
                                                     <div
-                                                        className=" w-96 h-96  rounded-2xl bg-contain  bg-no-repeat bg-center"
+                                                        className=" w-96 h-96  bg-contain  bg-no-repeat "
                                                         style={{ backgroundImage: `url(/storage/${post.media_url})` }}
                                                     >
                                                     </div>

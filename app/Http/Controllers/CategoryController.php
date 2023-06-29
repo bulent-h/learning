@@ -11,7 +11,6 @@ use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
-
     public function index()
     {
         $category = Category::all();
@@ -36,7 +35,6 @@ class CategoryController extends Controller
         $category->category_name = $request->category_name;
         $category->save();
         return $request;
-
     }
     public function destroy(Request $request)
     {

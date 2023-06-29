@@ -13,48 +13,29 @@ use App\Models\Message;
 
 class ChatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-    // public function index(){
-    //     return Inertia::render('Chat');
-    // }
     public function index(Request $request)
     {
-        // dd($request->user());
         $user = User::find($request->selectedUser);
-
         return Inertia::render('Chat', [
             'selectedUser' => $user
         ]);
-
     }
-
-    public function getMessages(Request $request,$id)
+    public function getMessages(Request $request, $id)
     {
-
         $user = User::find($request->user()->id);
-        $messages = $user->bothMessage($user->id,$id);
-
-        return  $messages;
+        $messages = $user->bothMessage($user->id, $id);
+        return $messages;
     }
-
-    public function getUsers(){
-        $users=User::all();
-        // dd($users->setVisible(['id', 'name']));
-        // return $users->setVisible(['id', 'name']) ;
+    public function getUsers()
+    {
+        $users = User::all();
         return $users;
-
     }
-
-    public function getLastMessage(Request $request ,$id)
+    public function getLastMessage(Request $request, $id)
     {
         $user = User::find($request->user()->id);
-        $messageId = $user->bothMessage($user->id,$id)->max('id');
-        $lastMessage=Message::find($messageId);
-        return  $lastMessage;
+        $messageId = $user->bothMessage($user->id, $id)->max('id');
+        $lastMessage = Message::find($messageId);
+        return $lastMessage;
     }
-
-
 }

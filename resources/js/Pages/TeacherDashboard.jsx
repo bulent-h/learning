@@ -54,11 +54,11 @@ export default function Home({ auth }) {
                                     </div>
                                 </div>
 
-                                <div className='flex flex-col  shrink-0 place-items-center  w-48 rounded-3xl m-2 '
+                                <div className='flex flex-col  shrink-0 place-items-center w-48 rounded-3xl m-2 '
                                     style={{ backgroundImage: ' linear-gradient(to bottom right,#6C12CB,#ABF9F9)' }}
                                 >
                                     <div className='flex flex-col h-full '>
-                                        <div className='flex justify-center my-3'>
+                                        <div className='flex justify-center my-3 mx-4'>
                                             <a href={route('course.create')}>Create Course</a>
                                         </div>
                                         {/* <div className='flex h-full justify-center my-4 place-items-center '>
