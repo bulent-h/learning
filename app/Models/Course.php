@@ -48,6 +48,9 @@ class Course extends Model
     {
         return $this->hasMany(Post::class,'course_id');
     }
-
+    public function ratings()
+    {
+        return $this->hasMany(RateCourse::class);
+    }
 
 }

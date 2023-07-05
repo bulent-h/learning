@@ -12,7 +12,9 @@ class CommentController extends Controller
         $validatedData = $request->validate([
             'lesson_id' => 'required|exists:lessons,id',
             'text' => 'required',
-            'media_url' => 'nullable|file|mimes:jpeg,png,gif,mp4|max:2048',
+            'parent_id' => 'exists:comments,id',
+
+            'file' => 'nullable|file|mimes:jpeg,png,gif,mp4|max:2048',
         ]);
         if ($request->hasFile('media_url')) {
             $mediaPath = $request->file('media_url')->store('media_url');
@@ -42,28 +44,33 @@ class CommentController extends Controller
         $comment->delete();
         return response()->json(['message' => 'Comment deleted successfully']);
     }
-    public function storeReply(Request $request, $parentId)
-    {
-        $validatedData = $request->validate([
-            'lesson_id' => 'required|exists:lessons,id',
-            'text' => 'required',
-            'media_url' => 'nullable|file|mimes:jpeg,png,gif,mp4|max:2048',
-        ]);
-        if ($request->hasFile('media_url')) {
-            $mediaPath = $request->file('media_url')->store('media_url');
-            $validatedData['media_url'] = $mediaPath;
-        }
-        $reply = Comment::create($validatedData);
-        $reply->parent_id = $parentId;
-        $reply->save();
-        return response()->json(['message' => 'Reply comment created successfully']);
-    }
+    // public function storeReply(Request $request, $parentId)
+    // {
+    //     $validatedData = $request->validate([
+    //         'lesson_id' => 'required|exists:lessons,id',
+    //         'text' => 'required',
+    //         'media_url' => 'nullable|file|mimes:jpeg,png,gif,mp4|max:2048',
+    //     ]);
+    //     if ($request->hasFile('media_url')) {
+    //         $mediaPath = $request->file('media_url')->store('media_url');
+    //         $validatedData['media_url'] = $mediaPath;
+    //     }
+    //     $reply = Comment::create($validatedData);
+    //     $reply->parent_id = $parentId;
+    //     $reply->save();
+    //     return response()->json(['message' => 'Reply comment created successfully']);
+    // }
     public function index(Request $request)
     {
+        // $comments = Comment::where('lesson_id', $request->lesson_id)
+        //     ->with('user')
+        //     ->get();
+        // return response()->json($comments);
         $comments = Comment::where('lesson_id', $request->lesson_id)
-            ->with('user')
-            ->get();
-        return response()->json($comments);
+        ->whereNull('parent_id')
+        ->with('user', 'replies.user')
+        ->get();
+    return response()->json($comments);
     }
     public function show($id)
     {

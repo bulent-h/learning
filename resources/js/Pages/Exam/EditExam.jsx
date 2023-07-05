@@ -238,14 +238,12 @@ export default function CreateExam({ CurrentExam, course, auth }) {
 
 
                             <div className="max-h-full  mt-8 rounded-2xl bg-white dark:bg-gray-800 overflow-auto ">
-
                                 <QuestionList CurrentExam={CurrentExam}
                                     questions={questions}
                                     exam={CurrentExam}
                                     getQuestions={getQuestions}
                                     getSingleQuestion={getSingleQuestion}>
                                 </QuestionList>
-
                             </div>
 
                         </section>

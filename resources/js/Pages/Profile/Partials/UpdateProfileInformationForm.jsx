@@ -68,6 +68,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
             console.log('Error fetching user data:', error);
         }
     };
+    console.log(recentlySuccessful);
 
     return (
         <section className={className}>

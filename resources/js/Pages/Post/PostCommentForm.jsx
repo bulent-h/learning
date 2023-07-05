@@ -1,49 +1,94 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function CommentForm({ onCommentSubmit, isReply = false, user, postId }) {
-
-    // const [user, setUser] = useState('');
+export default function CommentForm({ onCommentSubmit, user, postId, replyComment, setReplyComment }) {
 
     const [comment, setComment] = useState({
         post_id: postId,
         text: '',
         file: '',
-
+        fileUrl: '',
+        parent_id: replyComment?.id
     });
 
     const handleSubmit = (e) => {
 
-        if (isReply) {
-            onCommentSubmit(comment);
-        } else {
-            onCommentSubmit(comment);
-        }
+        onCommentSubmit(comment);
+        clearInput();
+    };
+
+    useEffect(() => {
+        setComment({
+            ...comment,
+            parent_id: replyComment?.id
+        });
+        console.log(replyComment)
+
+    }, [replyComment])
+
+    function handleTextChange(e) {
+        setComment({
+            ...comment,
+            text: e.target.value
+        });
+    }
+    function handleFileChange(e) {
+        var tmp = e.target.files[0];
+        setComment({
+            ...comment,
+            file: tmp,
+            fileUrl: URL.createObjectURL(tmp)
+        });
+    }
+    function handleRemoveFile() {
+        setComment({
+            ...comment,
+            file: '',
+            fileUrl: ''
+        });
+    }
+    function handleRemoveReply() {
+        setComment({
+            ...comment,
+            parent_id: ''
+        });
+        setReplyComment('');
+    }
+    function clearInput() {
         setComment({
             ...comment,
             text: '',
+            file: '',
+            parent_id: '',
+            fileUrl: ''
         })
-        console.log('OKKK')
+        setReplyComment(null);
+        // document.getElementById("file").value = null;
 
-    };
+    }
+    function handleEnter(e) {
+        if (e.key == 'Enter') {
+            send();
+        }
+    }
 
     return (
         <>
-            <div className="bg-grey-100 px-4 py-4 flex items-center rounded-2xl m-5 ">
+            <div className="bg-grey-100 px-4 py-2 flex items-center rounded-2xl m-5  ">
 
                 <div className='flex-1'>
                     <textarea
                         id="texttext"
                         value={comment.text}
-                        onChange={(e) => setComment({
-                            ...comment,
-                            text: e.target.value,
-                        })}
+                        onChange={handleTextChange}
+
+                        // onChange={(e) => setComment({
+                        //     ...comment,
+                        //     text: e.target.value,
+                        // })}
                         required
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-2xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here...">
                     </textarea>
                 </div>
-
-
                 <div className="mx-3 text-gray-900 dark:text-gray-400 ">
                     <label htmlFor="media">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -52,10 +97,11 @@ export default function CommentForm({ onCommentSubmit, isReply = false, user, po
                             </path>
                         </svg>
                         <input type="file" id="media" className="sr-only"
-                            onChange={(e) => setComment({
-                                ...comment,
-                                file: e.target.files[0],
-                            })}
+                            onChange={handleFileChange}
+                        // onChange={(e) => setComment({
+                        //     ...comment,
+                        //     file: e.target.files[0],
+                        // })}
                         />
                     </label>
                 </div>
@@ -71,7 +117,46 @@ export default function CommentForm({ onCommentSubmit, isReply = false, user, po
                 </div>
                 {/* <button onClick={handleSubmit}>{isReply ? 'Reply' : 'Comment'}</button> */}
             </div>
+            <div>
+                {
+                    comment.fileUrl
+                    &&
+                    <div className="" >
+                        <div className="bg-gray-400/50 p-2  bottom-20 right-2 w-1/6 rounded-xl flex flex-col justify-center">
+                            <button id="removeBtn" onClick={handleRemoveFile} className=" text-red-500 dark:text-red-500 text-sm hover:bg-gray-400 rounded-xl p-1 mb-1" >Remove</button>
+                            <img id="preview" className="w-36 opacity-75 rounded-2xl" src={comment.fileUrl} />
+                        </div>
+                    </div>
+                }
+                {
+                    comment.parent_id
+                    &&
+                    <div className="opacity-50 bg-gray-400/50  bottom-20 w-full flex rounded-2xl">
+                        <button id="removeBtn" onClick={handleRemoveReply}
+                            className="text-red-900 dark:text-red-500 text-sm  rounded-xl p-1 mb-1" >
+                            <div className='font-bold' >
+                                &#10005;
+                            </div>
+                        </button>
+                        <div className="w-4/6 border-none m-2 p-3 rounded-xl bg-gray-50 dark:bg-gray-800 drop-shadow-xl border-gray-200 dark:border-gray-700 m-2">
+                            {/* {
+                                (auth.auth.user.id == replyComment.id) ?
+                                    <p className="text-sm text-blue-300 mt-1   truncate w-40">
+                                        {auth.auth.user.name}
+                                    </p>
+                                    :
+                                    <p className="text-sm text-blue-300 mt-1   truncate w-40">
+                                        {currentUserChat.name}
+                                    </p>
 
+                            } */}
+                            <p className="text-sm mt-1  text-gray-800 dark:text-gray-200">
+                                {replyComment.text}
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
         </>
     );
 };

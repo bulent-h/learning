@@ -4,7 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import CourseStudentCard from '@/Components/Course/CourseStudentCard';
 import { useEffect, useState } from 'react';
 
-export default function IndexMyCourses({}) {
+export default function IndexMyCourses({ }) {
 
     const [courseCardList, setCourseCardList] = useState();
     const [courses, setCourses] = useState();
@@ -18,7 +18,8 @@ export default function IndexMyCourses({}) {
         await axios.get(route('course.getmycourse'))
             .then((data) => {
                 setCourses(data.data);
-                             }).catch(err => {
+
+            }).catch(err => {
                 console.error(err);
             })
     }

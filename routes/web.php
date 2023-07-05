@@ -16,6 +16,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCommentController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\RateCourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,20 +117,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/edit-question/destroy-option', [OptionController::class, 'destroy'])->name('option.destroy');
     Route::get('/edit-question/show-option', [OptionController::class, 'show'])->name('option.show');
 });
-//Student
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::post('/course/register', [CourseController::class, 'register'])->name('course.register');
-    Route::post('/course/unregister', [CourseController::class, 'unregister'])->name('course.unregister');
-
-    Route::get('/my-courses', [CourseController::class, 'myCourses'])->name('course.mycourse');
-    Route::get('/get-my-courses', [CourseController::class, 'getMyCourses'])->name('course.getmycourse');
-
-    Route::get('/course/view/{course_id}', [CourseController::class, 'show'])->name('course.show');
-    Route::get('/lesson/view/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
-    Route::get('/exam/view/{exam_id}', [ExamController::class, 'show'])->name('exam.show');
-    Route::post('/submit-exam/{exam_id}', [ExamController::class, 'submit'])->name('exam.submit');
-
-});
 
 //Comment
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -161,10 +148,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
+//Student
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/course/register', [CourseController::class, 'register'])->name('course.register');
+    Route::post('/course/unregister', [CourseController::class, 'unregister'])->name('course.unregister');
+    Route::get('/my-courses', [CourseController::class, 'myCourses'])->name('course.mycourse');
+    Route::get('/get-my-courses', [CourseController::class, 'getMyCourses'])->name('course.getmycourse');
+    Route::get('/course/view/{course_id}', [CourseController::class, 'show'])->name('course.show');
+    Route::get('/lesson/view/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
+    Route::get('/exam/view/{exam_id}', [ExamController::class, 'show'])->name('exam.show');
+    Route::post('/submit-exam/{exam_id}', [ExamController::class, 'submit'])->name('exam.submit');
+
+    Route::get('/course/{course_id}/ratings/average', [RateCourseController::class, 'getAverageRating'])->name('rate.average');
+    Route::get('/course/{course_id}/rating', [RateCourseController::class, 'myRating'])->name('rate.me');
+
+    Route::post('/course/{course_id}/ratings', [RateCourseController::class, 'store'])->name('rate.store');
+
+});
 
 //Chat
-
-
 Route::get('/chat', [ChatController::class, 'index'])->middleware(['auth', 'verified'])->name('chat');
 Route::get('/getUsers', [ChatController::class, 'getUsers'])->name('chat.getUsers');
 Route::get('/chat/messages/{id}', [ChatController::class, 'getMessages'])->name('chat.getMessages');

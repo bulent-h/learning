@@ -7,24 +7,32 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import DangerButton from '@/Components/DangerButton';
 import Modal from '@/Components/Modal';
 import { router } from '@inertiajs/react'
+import { Transition } from '@headlessui/react';
 
 export default function ViewCourse({ auth, course, lessons, exams }) {
 
-
     const [toggle, setToggle] = useState(false);
-
-    // function mapLesson() {
-    //     setLessonList(lessons.map((lesson) =>
-    //         <LessonStudentCard key={lesson.id} lesson={lesson}></LessonStudentCard>
-    //     ))
-    // }
-    // function mapExam() {
-    //     setExamList(exams.map((exam) =>
-    //         <ExamStudentCard key={exam.id} exam={exam}></ExamStudentCard>
-    //     ))
-    // }
     const [confirmingUnregister, setConfirmingUnregister] = useState(false);
+    const [rating, setRating] = useState(0);
+    const [existingRating, setExistingRating] = useState(null);
+    const [recentlySuccessful, setRecentlySuccessful] = useState(false);
 
+    const handleRatingChange = (event) => {
+        setRating(event.target.value);
+        console.log(event.target.value)
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await axios.post(route('rate.store', { course_id: course.id }), { rating: rating });
+            setRecentlySuccessful(true);
+
+        } catch (error) {
+            console.error(error.response.data);
+        }
+    };
     const confirmCourseUnregister = () => {
         setConfirmingUnregister(true);
     };
@@ -35,29 +43,72 @@ export default function ViewCourse({ auth, course, lessons, exams }) {
 
     const handleUnregister = (e) => {
         e.preventDefault();
-         router.post(route('course.unregister'), { id: course.id })
-
-        // axios.post(route('course.unregister'), { id: course.id })
-        //     .then(response => {
-        //         if (response.status >= 200 && 299 >= response.status) {
-        //             console.log('unregistered')
-        //             // getCourse()
-        //         }
-        //     })
-        //     .catch(error => {
-        //         // validationErrors = error.response.data.errors;
-        //         console.log(error);
-        //     })
+        router.post(route('course.unregister'), { id: course.id })
     }
     useEffect(() => {
+        // console.log(exams.length == 0)
+        // console.log(lessons.length)
 
+        const fetchExistingRating = async () => {
+            try {
+                const response = await axios.get(route('rate.me', { course_id: course.id }));
+                setExistingRating(response.data.rating);
 
-        console.log(exams.length == 0)
-        console.log(lessons.length)
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-
+        fetchExistingRating();
     }, [lessons, exams])
 
+    useEffect(() => {
+        if (existingRating) {
+            setRating(existingRating);
+        }
+        if (recentlySuccessful) {
+
+            const timeoutId = setTimeout(() => setRecentlySuccessful(false), 3000);
+            return () => clearTimeout(timeoutId);
+        }
+    }, [existingRating, recentlySuccessful]);
+
+
+    const renderStars = () => {
+        const stars = [];
+        for (let i = 1; i <= 5; i++) {
+            const starId = `star-${i}`;
+
+            stars.push(
+                <div key={i} >
+                    <label htmlFor={starId}>
+                        <svg
+                            className="star"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width="25px"
+                            height="25px"
+                        >
+                            <path
+                                fill={rating >= i ? '#ffc107' : '#e4e5e9'}
+                                d="M12 17.27l-5.06 2.49L8.5 13.85 4.93 10.3l5.99-.82L12 4l2.08 5.48 5.99.82-3.57 3.55 1.56 5.41L12 17.27z"
+                            />
+                        </svg>
+                    </label>
+                    <input
+                        id={starId}
+                        type="radio"
+                        name="rating"
+                        className='sr-only'
+                        value={i}
+                        checked={rating === i}
+                        onChange={handleRatingChange}
+                    />
+                </div>
+            );
+        }
+        return stars;
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -78,6 +129,28 @@ export default function ViewCourse({ auth, course, lessons, exams }) {
                                 <div onClick={() => setToggle(!toggle)} className="flex items-center justify-self-center mx-6 text-sm truncate overflow-hidden">
                                     {(toggle) ? <>&#10134;</> : <>&#10133;</>}
                                 </div>
+                                <div>
+                                    <form onSubmit={handleSubmit}>
+                                        <div className='text-black dark:text-white'></div>
+                                        <div className="flex items-center justify-center">
+                                            Rate this course :
+                                            {renderStars()}
+                                            <SecondaryButton type="submit" className='ml-5'>
+                                                {existingRating ? 'Update Rating' : 'Submit'}
+                                            </SecondaryButton>
+
+                                            <Transition
+                                                show={recentlySuccessful}
+                                                enterFrom="opacity-0"
+                                                leaveTo="opacity-0"
+                                                className="transition ease-in-out ml-4"
+                                            >
+                                                <p className="text-xs text-gray-600 dark:text-gray-400">Updated.</p>
+                                            </Transition>
+                                        </div>
+
+                                    </form>
+                                </div>
                                 <DangerButton onClick={confirmCourseUnregister} className='ml-auto'>
                                     Unregister
                                 </DangerButton>
@@ -85,38 +158,57 @@ export default function ViewCourse({ auth, course, lessons, exams }) {
 
                             {
                                 (toggle) &&
-                                <div className='' >
-                                    {course.course_description}
+                                <>
+                                    <div className='text-black dark:text-white' >
+                                        {course.course_description}
+                                    </div>
 
-
-                                </div>
+                                </>
                             }
-
 
                         </section >
 
+
+
                         {
-                            (exams.length != 0) && <section className="max-w-full my-6">
-                                <div className='mb-6 text-black dark:text-white font-bold'>Exams</div>
+                            (exams.length != 0) ?
+                                <section className="max-w-full my-6">
+                                    <div className='mb-6 text-black dark:text-white font-bold'>Exams</div>
 
-                                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2 ' >
-                                    {exams.map((exam) =>
-                                        <ExamStudentCard key={exam.id} exam={exam}></ExamStudentCard>
-                                    )}
-                                </div>
+                                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2 ' >
+                                        {exams.map((exam) =>
+                                            <ExamStudentCard key={exam.id} exam={exam}></ExamStudentCard>
+                                        )}
+                                    </div>
 
-                            </section >
+                                </section >
+                                :
+                                <>
+                                    <section className="max-w-full my-6">
+                                        <div className='mb-6 text-black dark:text-white font-bold'>Exams</div>
+                                        No Exams Yet
+                                    </section >
+                                </>
                         }
 
                         {
-                            (lessons.length != 0) && <section className="max-w-full my-6">
-                                <div className='mb-6 text-black dark:text-white font-bold' >Lessons</div>
-                                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2 ' >
-                                    {lessons.map((lesson) =>
-                                        <LessonStudentCard key={lesson.id} lesson={lesson}></LessonStudentCard>
-                                    )}
-                                </div>
-                            </section >
+                            (lessons.length != 0) ?
+                                <section className="max-w-full my-6">
+                                    <div className='mb-6 text-black dark:text-white font-bold' >Lessons</div>
+                                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2 ' >
+                                        {lessons.map((lesson) =>
+                                            <LessonStudentCard key={lesson.id} lesson={lesson}></LessonStudentCard>
+                                        )}
+                                    </div>
+                                </section >
+                                :
+
+                                <>
+                                    <section className="max-w-full my-6">
+                                        <div className='mb-6 text-black dark:text-white font-bold'>Lessons</div>
+                                        No Lessons Yet
+                                    </section >
+                                </>
                         }
                     </div>
 

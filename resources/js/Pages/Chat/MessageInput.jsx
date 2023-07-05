@@ -14,17 +14,8 @@ export default function MessageInput() {
         parent_id: ''
     });
 
-    // var validationErrors;
-
-    // const [file, setFile] = useState(
-    //     file:
-    //     url:
-    // );
-
     useEffect(() => {
         handleReceiverChange();
-
-
     }, [currentUserChat])
 
     useEffect(() => {
@@ -32,8 +23,6 @@ export default function MessageInput() {
             ...message,
             parent_id: replyMessage?.id
         });
-        // console.log(message?.parent_id)
-
     }, [replyMessage])
 
     function handleTextChange(e) {
@@ -169,7 +158,6 @@ export default function MessageInput() {
 
                 {/* <!-- Input --> */}
                 <div className="bg-grey-100 px-4 py-4 flex items-center bg-indigo-500 dark:bg-[#111120]">
-
                     {/* <!-- Emoji input--> */}
                     <div className="text-gray-900 dark:text-gray-400 ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" >
@@ -179,7 +167,6 @@ export default function MessageInput() {
 
                         </svg>
                     </div>
-
                     {/* <!-- File upload--> */}
                     <div className="ml-6 text-gray-900 dark:text-gray-400 ">
                         <label htmlFor="file" >
@@ -193,8 +180,6 @@ export default function MessageInput() {
                             />
                         </label>
                     </div>
-
-
                     {/* <!-- Text input--> */}
                     <div className="flex-1 mx-4 px-2 ">
                         <input
@@ -204,7 +189,6 @@ export default function MessageInput() {
                             className="w-full border rounded-full px-6 py-2  bg-white dark:bg-gray-700  dark:text-gray-200 focus:border-gray-100 border-indigo-400 dark:border-gray-900 "
                             type="text" placeholder="Message..." />
                     </div>
-
                     {/* <!-- Send button --> */}
                     <div className=" px-2" >
                         <button type="submit" onClick={send} className="place-self-end text-gray-900 dark:text-gray-400 ">

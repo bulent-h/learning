@@ -80,7 +80,7 @@ class CourseController extends Controller
     public function coursesToRegister(Request $request)
     {
         $userCourses = $request->user()->courses;
-        $courses = Course::whereNotIn('id', $userCourses->pluck('id'))->get();
+        $courses = Course::whereNotIn('id', $userCourses->pluck('id'))->with('category')->get();
         return $courses;
     }
     public function myCourses(Request $request)
@@ -89,7 +89,7 @@ class CourseController extends Controller
     }
     public function getMyCourses(Request $request)
     {
-        return $request->user()->courses;
+        return $request->user()->courses()->with('category')->get();
     }
     public function unregister(Request $request)
     {
