@@ -86,7 +86,7 @@ export default function CourseViewCard({ course, getCourse }) {
                     </div>
                 </div>
 
-                <div className="basis-8/12 px-4 mx-1 text-ellipsis overflow-auto  text-sm text-gray-100 dark:text-gray-900" >
+                <div className="basis-8/12 px-4 mx-1 text-ellipsis break-words overflow-y-auto  text-sm text-gray-100 dark:text-gray-900" >
                     {course.course_description}
                 </div>
                 <div className="basis-1/12 flex flex-rox justify-between items-center mx-5 my-3 text-gray-900 dark:text-gray-200" >

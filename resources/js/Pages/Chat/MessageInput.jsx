@@ -140,12 +140,14 @@ export default function MessageInput() {
                             {
                                 (auth.auth.user.id == replyMessage.id) ?
                                     <p className="text-sm text-blue-300 mt-1   truncate w-40">
-                                        {auth.auth.user.name}
+                                        {currentUserChat.name}
                                     </p>
                                     :
                                     <p className="text-sm text-blue-300 mt-1   truncate w-40">
-                                        {currentUserChat.name}
+                                        {auth.auth.user.name}
                                     </p>
+
+
 
                             }
                             <p className="text-sm mt-1  text-gray-800 dark:text-gray-200">

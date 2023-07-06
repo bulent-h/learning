@@ -237,7 +237,7 @@ export default function CreateExam({ CurrentExam, course, auth }) {
                             </div>
 
 
-                            <div className="max-h-full  mt-8 rounded-2xl bg-white dark:bg-gray-800 overflow-auto ">
+                            <div className="max-h-full  mt-8  bg-white dark:bg-gray-800 overflow-auto ">
                                 <QuestionList CurrentExam={CurrentExam}
                                     questions={questions}
                                     exam={CurrentExam}

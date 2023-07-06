@@ -53,7 +53,7 @@ export default function EditCategory( ) {
 
     return (
 
-        <section className="max-w-2xl">
+        <section className="w-full">
             <header>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100"> All Categories
                 </h2>

@@ -16,17 +16,25 @@ class PostController extends Controller
     {
         $userCourses = $request->user()->courses()->pluck('course_id');
         $myposts = Post::where('user_id', $request->user()->id)
-            ->with('user', 'course')->get();
+            ->with('user', 'course')
+            ->orderByDesc('id')
+            ->get();
         $posts = Post::with('user', 'course')
-            ->whereIn('course_id', $userCourses)->get();
+            ->whereIn('course_id', $userCourses)
+            ->orderByDesc('id')
+            ->get();
         $courses = $request->user()->courses;
+
+
         return Inertia::render('Post/IndexPosts', ['posts' => $posts, 'courses' => $courses, 'myposts' => $myposts]);
     }
     public function indexMyPosts(Request $request)
     {
         $user = $request->user();
         $posts = Post::where('user_id', $user->id)
-            ->with('user', 'course')->get();
+            ->with('user', 'course')
+            ->orderByDesc('id')
+            ->get();
         $courses = $user->courses;
         return Inertia::render('Post/MyPostList', ['posts' => $posts, 'courses' => $courses]);
     }

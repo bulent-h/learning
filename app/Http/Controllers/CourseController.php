@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -52,6 +53,26 @@ class CourseController extends Controller
     {
         $course = Course::find($request->id);
         return Inertia::render('Course/EditCourse', ['course' => $course, 'lessons' => $course->lessons, 'exams' => $course->exams]);
+    }
+
+    public function update(Request $request)
+    {
+        $course = Course::find($request->course_id);
+
+        $validator = Validator::make($request->all(), [
+            'course_title' => 'required|string|max:255|unique:courses,course_title,' . $course->id,
+            'course_description' => 'required|string|max:2048'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $course->update([
+            'creator_id' => $request->user()->id,
+            'category_id' => $request->category_id,
+            'course_title' => $request->course_title,
+            'course_description' => $request->course_description,
+        ]);
+        return redirect()->back();
     }
     public function manage(Request $request)
     {

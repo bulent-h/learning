@@ -103,7 +103,7 @@ class ExamController extends Controller
                 ]);
             }
             // return response()->json(['message' => 'Answers saved successfully']);
-            return response()->json(['message' => 'Late']);
+            // return response()->json(['message' => 'Late']);
 
             return Redirect::route('course.show', ['course_id' => $exam->course_id]);
 
